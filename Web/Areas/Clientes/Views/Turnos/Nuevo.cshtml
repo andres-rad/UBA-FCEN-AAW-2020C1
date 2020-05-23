@@ -1,0 +1,16 @@
+﻿ 
+@{
+    ViewData["Title"] = "Nuevo";
+}
+
+<h1>Solicitar</h1>
+<div class="jumbotron">
+    <form asp-controller="Turno" asp-action="SolicitarPorTurnero" method="get">
+        <input type="text" name="concepto" value="Id del turnero" />
+        <input type="submit" name="submit_button" value="Solicitar" />
+    </form>
+</div>
+
+<div class="jumbotron">
+    <h2>En esta parte deberia ir el mapa para seleccionar el turnero y el lector de qr. Como hacer para leer la imagen por el navegador???</h2>
+</div>

@@ -1,0 +1,11 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1 class="display-4">Hola!</h1>
+  
+    <a asp-area="Clientes" asp-controller="Turnos" asp-action="Nuevo" class="btn btn-primary">Solicitar turno</a>
+
+    <p>Si sos el encargado de un turnero, ingresa <a asp-area="Propietarios" asp-controller="Cuenta" asp-action="Ingresar" >aca</a></p>.
+</div>
