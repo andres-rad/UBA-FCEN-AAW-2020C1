@@ -9,7 +9,7 @@ namespace Infrastructura
         {
             return "soyunqr_decodificado";
         }
-
+        //
         public string Encode(string data)
         {
             return "soyunqr_codificado";
