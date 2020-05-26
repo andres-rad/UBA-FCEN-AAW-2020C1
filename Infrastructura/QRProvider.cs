@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Interfaces;
+using QRCoder;
 using System;
 
 namespace Infrastructura
@@ -12,7 +13,12 @@ namespace Infrastructura
 
         public string Encode(string data)
         {
-            return "soyunqr_codificado";
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(data, QRCodeGenerator.ECCLevel.Q);
+            Base64QRCode qrCode = new Base64QRCode(qrCodeData);
+            string qrCodeImageAsBase64 = qrCode.GetGraphic(20);
+
+            return qrCodeImageAsBase64;
         }
     }
 }
