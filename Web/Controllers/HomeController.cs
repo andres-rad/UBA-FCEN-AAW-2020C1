@@ -7,6 +7,7 @@ using Aplicacion.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Web.Models;
+using static QRCoder.PayloadGenerator;
 
 namespace Web.Controllers
 {
@@ -26,8 +27,11 @@ namespace Web.Controllers
         [HttpGet]
         public IActionResult Index([FromQuery] string? input)
         {
-            
-            string imageBase64Data = _qr.Encode(input ?? "Ups.. no me pasaste nada!");
+
+            Url generator = new Url("https://github.com/codebude/QRCoder/");
+            string qrCoderUrlPaylod = generator.ToString();
+
+            string imageBase64Data = _qr.Encode(input ?? qrCoderUrlPaylod);
             string imageDataURL = string.Format("data:image/png;base64,{0}", imageBase64Data);
             ViewBag.QR = imageDataURL;
 
