@@ -10,7 +10,7 @@ namespace Infrastructura
         {
             return "soyunqr_decodificado";
         }
-
+        //
         public string Encode(string data)
         {
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
