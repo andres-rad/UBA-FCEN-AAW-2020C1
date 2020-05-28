@@ -38,6 +38,12 @@ namespace Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult ReadQR(string qrdata)
+        {
+            ViewBag.data = qrdata;
+            return View();
+        }
 
         public IActionResult Privacy()
         {
