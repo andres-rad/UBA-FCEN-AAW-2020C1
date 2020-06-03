@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using Aplicacion.Interfaces;
 using Infrastructura;
 using Aplicacion.UseCases;
+using Infrastructura.Identity;
 
 namespace Web
 {
@@ -35,7 +36,10 @@ namespace Web
             //INICIO de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             services.AddScoped<IQRProvider, QRProvider>();
-            services.AddScoped<ITurneroRepository, EFTurneroRepository>();
+            services.AddScoped<IRepository, EFTurneroDbContext>();
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
+            services.AddHttpContextAccessor();
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             //Registro los caso de uso
