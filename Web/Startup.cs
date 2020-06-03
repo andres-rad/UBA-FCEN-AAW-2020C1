@@ -35,7 +35,7 @@ namespace Web
             //INICIO de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             services.AddScoped<IQRProvider, QRProvider>();
-            services.AddScoped<IRepositoryTurnero, FileRepositoryTurnero>();
+            services.AddScoped<ITurneroRepository, EFTurneroRepository>();
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             //Registro los caso de uso

@@ -9,24 +9,26 @@ namespace Aplicacion.UseCases
     public class SolicitarTurnoUC
     {
         IQRProvider _qrp;
-        IRepositoryTurnero _repositoryTurnero;
+        IRepository _repository;
 
-        public SolicitarTurnoUC(IQRProvider qrp, IRepositoryTurnero repositoryTurnero)
+        public SolicitarTurnoUC(IQRProvider qrp, IRepository repo)
         {
             _qrp = qrp;
-            _repositoryTurnero = repositoryTurnero;
+            _repository = repo;
         }
 
         public SolicitarTurnoResponse Procesar(SolicitarTurnoRequest request)
         {
 
-            var turnero = _repositoryTurnero.GetTurneroById(request.idTurnero);
+            var turnero = _repository.Turneros.Find(request.idTurnero);
 
-            var turno = turnero.NuevoTurno();
+            var turno = turnero.ExpedirTurno();
+
+            _repository.SaveChanges();
 
             var response = new SolicitarTurnoResponse
             {
-                Concepto = request.idTurnero,
+                Concepto = turnero.Concepto,
                 QR = _qrp.Encode(turno.ToString())
             };
 
