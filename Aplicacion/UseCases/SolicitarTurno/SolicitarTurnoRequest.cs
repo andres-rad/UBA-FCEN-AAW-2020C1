@@ -6,6 +6,7 @@ namespace Aplicacion.UseCases
 {
     public class SolicitarTurnoRequest
     {
-        public int idTurnero { get; set; }
+        public int IdTurnero { get; set; }
+        public string Email { get; set; }
     }
 }

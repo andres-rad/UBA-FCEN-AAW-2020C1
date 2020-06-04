@@ -22,6 +22,11 @@ namespace Aplicacion.UseCases
 
             var turnero = _repository.Turneros.Find(request.idTurnero);
 
+            if(turnero == null)
+            {
+                throw new Exception("Turnero no existente");
+            }
+
             var turno = turnero.ExpedirTurno();
 
             _repository.SaveChanges();
