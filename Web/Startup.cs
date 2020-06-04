@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -17,6 +16,7 @@ using Aplicacion.Interfaces;
 using Infrastructura;
 using Aplicacion.UseCases;
 using Infrastructura.Identity;
+using Infrastructure.Persistance;
 
 namespace Web
 {
@@ -36,7 +36,7 @@ namespace Web
             //INICIO de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             services.AddScoped<IQRProvider, QRProvider>();
-            services.AddScoped<IRepository, EFTurneroDbContext>();
+            services.AddScoped<IRepository, ApplicationDbContext>();
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
             services.AddHttpContextAccessor();
@@ -48,7 +48,7 @@ namespace Web
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseInMemoryDatabase(Configuration.GetConnectionString("InMemoryDB")));
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -93,7 +93,10 @@ namespace Web
                     pattern: "Propietarios/{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}",
+                     defaults: new { area= "Clientes", controller = "Home", action = "Index" });
+
+
                 endpoints.MapRazorPages();
             });
         }

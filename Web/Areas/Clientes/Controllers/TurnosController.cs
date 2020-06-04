@@ -35,7 +35,7 @@ namespace Web.Areas.Clientes.Controllers
         }
 
         [HttpGet]
-        public IActionResult SolicitarPorTurnero(string idTurnero)
+        public IActionResult SolicitarPorTurnero(int idTurnero)
         {
             
             var request = new SolicitarTurnoRequest

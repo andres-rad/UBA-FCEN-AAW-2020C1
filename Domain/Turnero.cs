@@ -8,12 +8,15 @@ namespace Domain
 {
     public class Turnero
     {
+        public int Id { get; internal set; }
         public int PropietarioId { get; }
         public string Concepto { get; }
         public LatLon Ubicacion { get; }
         public Direccion Direccion{ get; }
 
         List<Turno> _turnos;
+
+        private Turnero() { }
 
         public Turnero(int propietarioId, string concepto, LatLon ubicacion)
         {

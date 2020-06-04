@@ -26,6 +26,9 @@
   <ItemGroup>
     <Folder Include="Areas\Clientes\Data\" />
     <Folder Include="Areas\Propietarios\Data\" />
+    <Folder Include="Areas\Propietarios\Controllers\" />
+    <Folder Include="Areas\Propietarios\Models\" />
+    <Folder Include="Areas\Propietarios\Views\" />
   </ItemGroup>
 
 </Project>
