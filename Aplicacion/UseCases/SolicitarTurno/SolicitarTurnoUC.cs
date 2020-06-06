@@ -20,7 +20,7 @@ namespace Aplicacion.UseCases
         public SolicitarTurnoResponse Procesar(SolicitarTurnoRequest request)
         {
 
-            var turnero = _repository.Turneros.Find(request.idTurnero);
+            var turnero = _repository.Turneros.Find(request.IdTurnero);
 
             if(turnero == null)
             {

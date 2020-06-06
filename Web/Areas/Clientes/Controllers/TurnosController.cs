@@ -40,7 +40,7 @@ namespace Web.Areas.Clientes.Controllers
             
             var request = new SolicitarTurnoRequest
             {
-                idTurnero = idTurnero
+                IdTurnero = idTurnero
             };
 
             var response = _solicitarTurnoUC.Procesar(request);
