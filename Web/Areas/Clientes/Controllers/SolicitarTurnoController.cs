@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aplicacion.UseCases.Cliente;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using Web.Areas.Clientes.Models;
 
 namespace Web.Areas.Clientes.Controllers
@@ -29,8 +30,9 @@ namespace Web.Areas.Clientes.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcesarQR(string data)
+        public IActionResult ProcesarQR(string data, [FromServices] LeerQrUC leerQrUC)
         {
+            
             return RedirectToAction(nameof(ConfirmarTurno), new { idTurero = 18765});
         }
 

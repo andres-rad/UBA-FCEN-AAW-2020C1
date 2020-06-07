@@ -5,7 +5,7 @@ using Domain;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class ListarTurneroUC
+    public class ListarTurneroUC : IUseCase
     {
         IRepository _repository;
 

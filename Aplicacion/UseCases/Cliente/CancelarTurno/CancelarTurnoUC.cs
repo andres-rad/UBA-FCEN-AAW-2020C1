@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
 {
-    public class CancelarTurnoUC
+    public class CancelarTurnoUC : IUseCase
     {
         IRepository _repository;
 
