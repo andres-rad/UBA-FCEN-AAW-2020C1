@@ -46,6 +46,7 @@ namespace Web
 
             //Registro los caso de uso
             services.AddTransient<SolicitarTurnoUC, SolicitarTurnoUC>();
+            services.AddTransient<CancelarTurnoUC, CancelarTurnoUC>();
             services.AddTransient<CrearTurneroUC, CrearTurneroUC>();
             services.AddTransient<ListarTurneroUC, ListarTurneroUC>();
 
