@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aplicacion.UseCases.Cliente.DemorarTurno
+namespace Aplicacion.UseCases.Cliente
 {
     public class DemorarTurnoUC
     {

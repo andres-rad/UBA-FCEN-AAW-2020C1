@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Aplicacion.UseCases.Cliente.CancelarTurno
+namespace Aplicacion.UseCases.Cliente
 {
     public class CancelarTurnoUC
     {
@@ -24,4 +24,5 @@ namespace Aplicacion.UseCases.Cliente.CancelarTurno
 
             return new CancelarTurnoResponse();
         }
+    }
 }

@@ -1,4 +1,4 @@
-﻿namespace Aplicacion.UseCases.Cliente.CancelarTurno
+﻿namespace Aplicacion.UseCases.Cliente
 {
     public class CancelarTurnoResponse
     {

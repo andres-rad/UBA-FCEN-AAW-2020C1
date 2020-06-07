@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aplicacion.UseCases
+namespace Aplicacion.UseCases.Cliente
 {
     public class SolicitarTurnoRequest
     {

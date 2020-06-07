@@ -14,9 +14,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Http;
 using Aplicacion.Interfaces;
 using Infrastructura;
-using Aplicacion.UseCases;
 using Infrastructura.Identity;
 using Infrastructure.Persistance;
+using Aplicacion.UseCases.Cliente;
 
 namespace Web
 {
