@@ -47,5 +47,11 @@ namespace Domain
         {
             _turnos.RemoveAt(0);
         }
+
+        public void Cancelar(int idTurno)
+        {
+            var turno = _turnos.Find(turno => turno.Id == idTurno);
+            _turnos.Remove(turno);
+        }
     }
 }
