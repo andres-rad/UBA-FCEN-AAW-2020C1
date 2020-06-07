@@ -17,6 +17,8 @@ using Infrastructura;
 using Infrastructura.Identity;
 using Infrastructure.Persistance;
 using Aplicacion.UseCases.Cliente;
+using Aplicacion.UseCases.Propietario;
+
 
 namespace Web
 {
@@ -44,6 +46,8 @@ namespace Web
 
             //Registro los caso de uso
             services.AddTransient<SolicitarTurnoUC, SolicitarTurnoUC>();
+            services.AddTransient<CrearTurneroUC, CrearTurneroUC>();
+            services.AddTransient<ListarTurneroUC, ListarTurneroUC>();
 
 
             services.AddDbContext<ApplicationDbContext>(options =>

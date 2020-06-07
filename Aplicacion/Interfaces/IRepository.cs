@@ -10,7 +10,6 @@ namespace Aplicacion.Interfaces
     public interface IRepository
     {
         DbSet<Turnero> Turneros { get; set; }
-
         int SaveChanges();
 
     }

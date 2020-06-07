@@ -18,11 +18,21 @@ namespace Domain
 
         private Turnero() { }
 
-        public Turnero(int propietarioId, string concepto, LatLon ubicacion)
+        public Turnero(int propietarioId, string concepto, LatLon ubicacion, Direccion direccion)
         {
             PropietarioId = propietarioId;
             Concepto = concepto;
             Ubicacion = ubicacion;
+            Direccion = direccion;
+            _turnos = new List<Turno>();
+        }
+
+        public Turnero(int propietarioId, string concepto, /*LatLon ubicacion,*/ Direccion direccion)
+        {
+            PropietarioId = propietarioId;
+            Concepto = concepto;
+            //Ubicacion = ubicacion;
+            Direccion = direccion;
             _turnos = new List<Turno>();
         }
 

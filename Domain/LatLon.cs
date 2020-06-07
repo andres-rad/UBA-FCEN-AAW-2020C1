@@ -1,4 +1,4 @@
-﻿namespace Domain
+﻿namespace Dominio
 {
     public struct LatLon
     {

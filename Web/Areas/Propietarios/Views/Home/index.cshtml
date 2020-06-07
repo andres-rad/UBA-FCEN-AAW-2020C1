@@ -1,0 +1,39 @@
+﻿@using Aplicacion.UseCases.Propietario
+@model List<ListarTurneroDTO>
+
+
+<main>
+    <div class="row">
+        <h1>
+            Mis Turneros
+        </h1>
+        <div class="col-12">
+            <table class="table" style="display: @(Model.Count == 0 ? "none" : "block")">
+                <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var turnero in Model)
+                    {
+                        <tr>
+                            <td> @turnero.Concepto </td>
+                            <td>
+                                <a href="#"><span class="glyphicon glyphicon-search"></span></a>
+                                <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <span style="display: @(Model.Count == 0 ? "block" : "none")">Aún no creo ningún turnero</span>
+        </div>
+    </div>
+    <footer>
+        <form method="get" action="/Propietarios/CrearTurnero">
+            <button type="submit">Nuevo Turnero</button>
+        </form>
+    </footer>
+</main>
