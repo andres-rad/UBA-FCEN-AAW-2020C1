@@ -9,10 +9,10 @@ namespace Domain
     public class Turnero
     {
         public int Id { get; internal set; }
-        public int PropietarioId { get; }
-        public string Concepto { get; }
-        public LatLon Ubicacion { get; }
-        public Direccion Direccion{ get; }
+        public int PropietarioId { get; internal set; }
+        public string Concepto { get; internal set; }
+        public LatLon Ubicacion { get; internal set; }
+        public Direccion Direccion{ get; internal set; }
 
         List<Turno> _turnos;
 
