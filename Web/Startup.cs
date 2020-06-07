@@ -45,8 +45,6 @@ namespace Web
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             //Registro los caso de uso
-
-
             var typesFromAssemblies = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(IUseCase))));
 

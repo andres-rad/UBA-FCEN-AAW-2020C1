@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Web.Areas.Propietarios.Models;
 using Aplicacion.UseCases.Propietario;
+using Aplicacion.Interfaces;
 
 namespace Web.Areas.Propietarios.Controllers
 {
@@ -13,6 +10,13 @@ namespace Web.Areas.Propietarios.Controllers
     [AllowAnonymous]
     public class CrearTurneroController : Controller
     {
+        ICurrentUserService _userService;
+        
+        public CrearTurneroController(ICurrentUserService us)
+        {
+            _userService = us;
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
@@ -24,7 +28,7 @@ namespace Web.Areas.Propietarios.Controllers
         {
             var req = new CrearTurneroRequest
             {
-                IdPropietario = 1,
+                IdPropietario = _userService.UserId,
                 Ciudad = turnero.Ciudad,
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,

@@ -1,21 +1,22 @@
 ﻿using Domain;
+using QRCoder;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class ListarTurneroDTO
+    public class DetalleTurneroResponse
     {
-        public int Id { get; set; }
+        public int Id { get; }
+        public string IdPropietario { get; }
+        public string Concepto { get; }
+        public string Ciudad { get; }
+        public string Calle { get; }
+        public int Numero { get; }
+        public string Qr { get; }
 
-        public string IdPropietario { get; set; }
-        public string Concepto{ get; set; }
-        public string Ciudad { get; set; }
-        public string Calle { get; set; }
-        public int Numero { get; set; }
-
-        public ListarTurneroDTO(Turnero turnero)
+        public DetalleTurneroResponse(Turnero turnero)
         {
             Id = turnero.Id;
             IdPropietario = turnero.IdPropietario;
@@ -23,6 +24,7 @@ namespace Aplicacion.UseCases.Propietario
             Ciudad = turnero.Direccion.Ciudad;
             Calle = turnero.Direccion.Calle;
             Numero = turnero.Direccion.Numero;
+            Qr = turnero.Qr;
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class CrearTurneroRequest
     {
-        public int IdPropietario { get; set; }
+        public string IdPropietario { get; set; }
         //public LatLon ubicacion { get; set; }
         public string Ciudad { get; set; }
         public string Calle { get; set; }

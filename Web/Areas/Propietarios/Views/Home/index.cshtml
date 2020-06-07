@@ -12,6 +12,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Direccion</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -20,9 +21,17 @@
                     {
                         <tr>
                             <td> @turnero.Concepto </td>
+                            <td> @turnero.Ciudad - @turnero.Calle @turnero.Numero </td>
                             <td>
-                                <a href="#"><span class="glyphicon glyphicon-search"></span></a>
-                                <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                                @Html.ActionLink(
+                                    "Detalle",
+                                    "Index",
+                                    "DetalleTurnero",
+                                    new {
+                                        idTurnero = turnero.Id
+                                    },
+                                    null
+                                )
                             </td>
                         </tr>
                     }

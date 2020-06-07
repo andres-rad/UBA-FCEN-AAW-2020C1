@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class ListarTurneroRequest
+    public class DetalleTurneroRequest
     {
-        public string IdPropietario { get; set; }
+        public int IdTurnero { get; set; }
     }
 }
