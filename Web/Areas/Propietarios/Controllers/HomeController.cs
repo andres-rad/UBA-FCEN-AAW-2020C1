@@ -13,6 +13,7 @@ namespace Web.Areas.Propietarios.Controllers
 {
     [Area("Propietarios")]
     [AllowAnonymous]
+    //[Authorize]
     public class HomeController : Controller
     {
         // GET: HomeController

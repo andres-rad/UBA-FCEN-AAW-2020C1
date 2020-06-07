@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
 {
-    public class DemorarTurnoUC : IUseCase
-    { 
+    public class LeerQrUC : IUseCase
+    {
+
     }
 }

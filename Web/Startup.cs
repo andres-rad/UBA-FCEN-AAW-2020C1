@@ -18,7 +18,7 @@ using Infrastructura.Identity;
 using Infrastructure.Persistance;
 using Aplicacion.UseCases.Cliente;
 using Aplicacion.UseCases.Propietario;
-
+using System.Reflection;
 
 namespace Web
 {
@@ -45,10 +45,12 @@ namespace Web
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
 
             //Registro los caso de uso
-            services.AddTransient<SolicitarTurnoUC, SolicitarTurnoUC>();
-            services.AddTransient<CancelarTurnoUC, CancelarTurnoUC>();
-            services.AddTransient<CrearTurneroUC, CrearTurneroUC>();
-            services.AddTransient<ListarTurneroUC, ListarTurneroUC>();
+
+            var typesFromAssemblies = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(a => a.DefinedTypes.Where(x => x.GetInterfaces().Contains(typeof(IUseCase))));
+
+            foreach (var type in typesFromAssemblies)
+                services.Add(new ServiceDescriptor(type, type, ServiceLifetime.Transient));
 
 
             services.AddDbContext<ApplicationDbContext>(options =>

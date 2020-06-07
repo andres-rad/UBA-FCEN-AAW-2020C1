@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
 {
-    public class SolicitarTurnoUC
+    public class SolicitarTurnoUC : IUseCase
     {
         IQRProvider _qrp;
         IRepository _repository;
