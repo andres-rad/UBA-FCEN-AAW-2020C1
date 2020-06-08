@@ -1,42 +1,46 @@
 ﻿@using Aplicacion.UseCases.Cliente
 @model List<ListarTurneroMapaDTO>
 
-        <div id="buscarTurneroMap" style="height:400px"></div>
-        <script src="https://openlayers.org/api/OpenLayers.js"></script>
-        <script>
-            /////////////////////////////////////////////////////////
-            // FACTORIZAR
-            var zoom = 12;
-            var latIni = -34.6302673;
-            var lonIni = -58.4356537;
-            var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
-            var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-            var positionIni = new OpenLayers.LonLat(lonIni, latIni).transform(fromProjection, toProjection);
+<div id="buscarTurneroMap" style="height:400px"></div>
+<script src="https://openlayers.org/api/OpenLayers.js"></script>
+<script>
+    /////////////////////////////////////////////////////////
+    // FACTORIZAR
+    var zoom = 12;
+    var latIni = -34.6302673;
+    var lonIni = -58.4356537;
+    var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+    var positionIni = new OpenLayers.LonLat(lonIni, latIni).transform(fromProjection, toProjection);
 
-            map = new OpenLayers.Map("buscarTurneroMap");
-            var mapnik = new OpenLayers.Layer.OSM();
-            map.addLayer(mapnik);
+    map = new OpenLayers.Map("buscarTurneroMap");
+    var mapnik = new OpenLayers.Layer.OSM();
+    map.addLayer(mapnik);
 
-            map.setCenter(positionIni, zoom);
-            /////////////////////////////////////////////////////////
+    map.setCenter(positionIni, zoom);
+    /////////////////////////////////////////////////////////
 
-            function cargar(id, concepto, lat, lon) {
-                var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
-                var markers = new OpenLayers.Layer.Markers("Markers");
-                map.addLayer(markers);
+    function cargar(id, concepto, lat, lon) {
+        var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+        var markers = new OpenLayers.Layer.Markers("Markers");
+        map.addLayer(markers);
 
-                var marker = new OpenLayers.Marker(position);
-                marker.id = id;
-                marker.icon.imageDiv.title = concepto;
+        var marker = new OpenLayers.Marker(position);
+        marker.id = id;
+        marker.icon.imageDiv.title = concepto;
 
-                marker.events.register("click", marker, function () {
-                        //popup?
-                });
-                markers.addMarker(marker);
-            }
-        </script>
-        @foreach (var turnero in Model)
-        {
-            <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
-        }
-    
+        marker.events.register("click", marker, function () {
+            $("#buscarTurneroDataPanel").css("visibility", "visible");
+            $("#inputDescripcion")[0].innerText = concepto;
+        });
+        markers.addMarker(marker);
+    }
+</script>
+@foreach (var turnero in Model)
+{
+    <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
+}
+<div id="buscarTurneroDataPanel" style="visibility: hidden;">
+    <h1><label for="conceptoInput" id="inputDescripcion"></label><br /></h1>
+    <h3><label for="conceptoInput" id="inputDireccion">Santa Cruz 1345 - CABA</label></h3>
+</div>
