@@ -40,7 +40,10 @@
 {
     <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
 }
-<div id="buscarTurneroDataPanel" style="visibility: hidden;">
-    <h1><label for="conceptoInput" id="inputDescripcion"></label><br /></h1>
-    <h3><label for="conceptoInput" id="inputDireccion">Santa Cruz 1345 - CABA</label></h3>
-</div>
+<form asp-action="PedirTurno" method="post" name="pedirTurnoForm">
+    <div id="buscarTurneroDataPanel" style="visibility: hidden;">
+        <h1><label for="conceptoInput" id="inputDescripcion"></label><br /></h1>
+        <h3><label for="conceptoInput" id="inputDireccion">Santa Cruz 1345 - CABA</label></h3>
+        <button type="submit" class="btn btn-primary">PedirTurno</button>
+    </div>
+</form>
