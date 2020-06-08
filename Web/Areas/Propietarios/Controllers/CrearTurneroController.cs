@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Web.Areas.Propietarios.Models;
 using Aplicacion.UseCases.Propietario;
 using Aplicacion.Interfaces;
+using Dominio;
 
 namespace Web.Areas.Propietarios.Controllers
 {
@@ -33,6 +34,7 @@ namespace Web.Areas.Propietarios.Controllers
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,
                 Concepto = turnero.Concepto,
+                Ubicacion = new LatLon(turnero.Latitud, turnero.Longitud),
                 CantidadMaxima = turnero.CantidadMaxima 
             };
 

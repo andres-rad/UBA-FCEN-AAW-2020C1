@@ -15,7 +15,8 @@ namespace Web.Areas.Propietarios.Models
         public int Numero { get; set; }
         public int CantidadMaxima { get; set; }
 
-        //public LatLon Ubicacion { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
 
         public CrearTurneroVM() { }
         public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, int cantidad=9)

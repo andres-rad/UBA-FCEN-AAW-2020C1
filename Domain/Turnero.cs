@@ -18,11 +18,12 @@ namespace Domain
         List<Turno> _turnos;
 
         private Turnero() { }
-        public Turnero(string idPropietario, string concepto, Direccion direccion, int cantidad=0)
+        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidad=0)
         {
             IdPropietario = idPropietario;
             Concepto = concepto;
             Direccion = direccion;
+            Ubicacion = ubicacion;
             Qr = GenerarQr();
             _turnos = new List<Turno>();
             CantidadMaxima = cantidad;

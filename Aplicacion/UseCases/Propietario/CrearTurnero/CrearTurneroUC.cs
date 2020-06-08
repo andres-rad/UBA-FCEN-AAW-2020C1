@@ -32,6 +32,7 @@ namespace Aplicacion.UseCases.Propietario
                turnero = new Turnero(
                     req.IdPropietario,
                     req.Concepto,
+                    req.Ubicacion,
                     direccion
                 );
             } 
@@ -40,6 +41,7 @@ namespace Aplicacion.UseCases.Propietario
                 turnero = new Turnero(
                     req.IdPropietario,
                     req.Concepto,
+                    req.Ubicacion,
                     direccion,
                     req.CantidadMaxima
                 );
