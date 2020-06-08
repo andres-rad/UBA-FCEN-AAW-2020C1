@@ -1,5 +1,6 @@
 ﻿using Domain;
 using Dominio;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,14 +19,17 @@ namespace Web.Areas.Propietarios.Models
         public string Latitud { get; set; }
         public string Longitud { get; set; }
 
+        public IFormFile[] files { get; set; }
+
         public CrearTurneroVM() { }
-        public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, int cantidad=9)
+        public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, IFormFile[] archivos, int cantidad=9)
         {
             Concepto = concepto;
             Ciudad = ciudad;
             Calle = calle;
             Numero = numero;
             CantidadMaxima = cantidad;
+            files=archivos;
         }
     }
 }
