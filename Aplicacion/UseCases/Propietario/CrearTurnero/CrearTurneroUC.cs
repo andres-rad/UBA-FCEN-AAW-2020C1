@@ -28,7 +28,8 @@ namespace Aplicacion.UseCases.Propietario
             var turnero = new Turnero(
                 req.IdPropietario,
                 req.Concepto,
-                direccion
+                direccion,
+                req.Ubicacion
             );
 
             _repository.Turneros.Add(turnero);

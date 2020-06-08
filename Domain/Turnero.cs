@@ -27,11 +27,11 @@ namespace Domain
             _turnos = new List<Turno>();
         }
 
-        public Turnero(int propietarioId, string concepto, /*LatLon ubicacion,*/ Direccion direccion)
+        public Turnero(int propietarioId, string concepto, Direccion direccion, LatLon ubicacion)
         {
             PropietarioId = propietarioId;
             Concepto = concepto;
-            //Ubicacion = ubicacion;
+            Ubicacion = ubicacion;
             Direccion = direccion;
             _turnos = new List<Turno>();
         }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Web.Areas.Propietarios.Models;
 using Aplicacion.UseCases.Propietario;
+using Dominio;
 
 namespace Web.Areas.Propietarios.Controllers
 {
@@ -28,7 +29,8 @@ namespace Web.Areas.Propietarios.Controllers
                 Ciudad = turnero.Ciudad,
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,
-                Concepto = turnero.Concepto
+                Concepto = turnero.Concepto,
+                Ubicacion = new LatLon((double)turnero.Latitud, (double)turnero.Longitud)
             };
 
             uc.Procesar(req);

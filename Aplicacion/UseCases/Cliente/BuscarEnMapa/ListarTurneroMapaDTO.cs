@@ -22,6 +22,7 @@ namespace Aplicacion.UseCases.Cliente
             Ciudad = turnero.Direccion.Ciudad;
             Calle = turnero.Direccion.Calle;
             Numero = turnero.Direccion.Numero;
+            Ubicacion = turnero.Ubicacion;
         }
     }
 }

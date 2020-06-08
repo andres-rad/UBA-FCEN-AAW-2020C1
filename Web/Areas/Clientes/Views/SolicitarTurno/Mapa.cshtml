@@ -1,42 +1,24 @@
 ﻿@using Aplicacion.UseCases.Cliente
 @model List<ListarTurneroMapaDTO>
 
-
-    <main>
-        <button onclick="cargar()">Cargar Turneros</button>
-
         <div id="buscarTurneroMap" style="height:250px"></div>
         <script src="https://openlayers.org/api/OpenLayers.js"></script>
         <script>
             var zoom = 13;
             var a = 0;
-            var lat = -34.6389837;
-            var lon = -58.6836315;
+            var latIni = -34.6389837;
+            var lonIni = -58.6836315;
             var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
             var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-            var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+            var positionIni = new OpenLayers.LonLat(lonIni, latIni).transform(fromProjection, toProjection);
 
             map = new OpenLayers.Map("buscarTurneroMap");
             var mapnik = new OpenLayers.Layer.OSM();
             map.addLayer(mapnik);
 
-            map.setCenter(position, zoom);
+            map.setCenter(positionIni, zoom);
 
-            function cargar(id, concepto) {
-                
-                var lat = null;
-                var lon = null;
-                if (a == 0) {
-                    lat = -34.6389837;
-                    lon = -58.6836315;
-                    a = 1;
-                }
-                else {
-                    lat =-34.6489837
-                     lon=    - 58.6936315
-                }
-                
-
+            function cargar(id, concepto, lat, lon) {
                 var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
                 var markers = new OpenLayers.Layer.Markers("Markers");
                 map.addLayer(markers);
@@ -49,13 +31,10 @@
                     alert("ok");
                 });
                 markers.addMarker(marker);
-
             }
-
-
         </script>
         @foreach (var turnero in Model)
         {
-    <script> cargar(@turnero.Id,"@turnero.Concepto", @turnero.Ubicacion.Latitud, @turnero.Ubicacion.Longitud)</script>
+            <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
         }
-    </main>
+    

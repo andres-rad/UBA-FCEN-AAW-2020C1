@@ -31,8 +31,8 @@
             <input type="text"
                    id="inputCalle"
                    class="form-control"
-                   name="calle" 
-                   asp-for="Calle"/>
+                   name="calle"
+                   asp-for="Calle" />
         </div>
         <div class="form-group col-md-2">
             <label for="inputNumero">Altura</label>
@@ -42,6 +42,22 @@
                    min="1"
                    name="numero"
                    asp-for="Numero">
+        </div>
+        <div class="form-group col-md-7">
+            <label for="inputNumero">Lat</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputLatitud"
+                   name="latitud"
+                   asp-for="Latitud">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="inputNumero">Lon</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputLongitud"
+                   name="longitud"
+                   asp-for="Longitud">
         </div>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
