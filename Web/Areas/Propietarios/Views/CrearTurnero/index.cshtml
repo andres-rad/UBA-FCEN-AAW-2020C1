@@ -95,6 +95,7 @@
 
         function handleClick(e) {
             var lonlat = map.getLonLatFromViewPortPx(e.xy);
+            lonlat = new OpenLayers.LonLat(lonlat.lon, lonlat.lat).transform(toProjection, fromProjection);
             $("#inputLatitud").val(lonlat.lat);
             $("#inputLongitud").val(lonlat.lon);
         }
