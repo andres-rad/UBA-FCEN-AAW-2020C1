@@ -18,9 +18,11 @@ namespace Web.Areas.Clientes.Controllers
     {
 
         [HttpGet]
-        public IActionResult Mapa()
+        public IActionResult Mapa([FromServices] ListarEnMapaUC uc)
         {
-            return View();
+            var response = uc.Procesar();
+
+            return View(response.turneros);
         }
         
         [HttpGet]
