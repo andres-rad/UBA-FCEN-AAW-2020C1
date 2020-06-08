@@ -8,6 +8,8 @@ namespace Aplicacion.UseCases.Propietario
     public class ListarTurneroDTO
     {
         public int Id { get; set; }
+
+        public string IdPropietario { get; set; }
         public string Concepto{ get; set; }
         public string Ciudad { get; set; }
         public string Calle { get; set; }
@@ -16,6 +18,7 @@ namespace Aplicacion.UseCases.Propietario
         public ListarTurneroDTO(Turnero turnero)
         {
             Id = turnero.Id;
+            IdPropietario = turnero.IdPropietario;
             Concepto = turnero.Concepto;
             Ciudad = turnero.Direccion.Ciudad;
             Calle = turnero.Direccion.Calle;

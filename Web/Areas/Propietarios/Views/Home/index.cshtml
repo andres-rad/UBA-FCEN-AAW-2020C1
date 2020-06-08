@@ -1,6 +1,8 @@
 ﻿@using Aplicacion.UseCases.Propietario
 @model List<ListarTurneroDTO>
-
+@{
+    ViewData["Area"] = "Propietarios";
+}
 
 <main>
     <div class="row">
@@ -12,17 +14,27 @@
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
+                        <th scope="col">Direccion</th>
                         <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var turnero in Model)
+                    @foreach (var turnero in Model)
                     {
                         <tr>
                             <td> @turnero.Concepto </td>
+                            <td> @turnero.Ciudad - @turnero.Calle @turnero.Numero </td>
                             <td>
-                                <a href="#"><span class="glyphicon glyphicon-search"></span></a>
-                                <a href="#"><span class="glyphicon glyphicon-remove"></span></a>
+                                @Html.ActionLink(
+                                    "Detalle",
+                                    "Index",
+                                    "DetalleTurnero",
+                                    new
+                                         {
+                                        idTurnero = turnero.Id
+                                    },
+                                    null
+                                )
                             </td>
                         </tr>
                     }

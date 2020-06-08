@@ -13,18 +13,18 @@ namespace Web.Areas.Propietarios.Models
         public string Ciudad{ get; set; }
         public string Calle { get; set; }
         public int Numero { get; set; }
-        public decimal Latitud { get; set; }
-        public decimal Longitud { get; set; }
+        public int CantidadMaxima { get; set; }
+
+        //public LatLon Ubicacion { get; set; }
 
         public CrearTurneroVM() { }
-        public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, decimal latitud, decimal longitud )
+        public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, int cantidad=9)
         {
             Concepto = concepto;
             Ciudad = ciudad;
             Calle = calle;
             Numero = numero;
-            Latitud = latitud;
-            Longitud = longitud;
+            CantidadMaxima = cantidad;
         }
     }
 }

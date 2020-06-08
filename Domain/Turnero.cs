@@ -1,41 +1,44 @@
 ﻿using Dominio;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using QRCoder;
 
 namespace Domain
 {
     public class Turnero
     {
         public int Id { get; internal set; }
-        public int PropietarioId { get; internal set; }
+        public string IdPropietario { get; internal set; }
         public string Concepto { get; internal set; }
         public LatLon Ubicacion { get; internal set; }
         public Direccion Direccion{ get; internal set; }
+        public string Qr { get; internal set; }
+        public int CantidadMaxima { get; set; }
 
         List<Turno> _turnos;
 
         private Turnero() { }
-
-        public Turnero(int propietarioId, string concepto, LatLon ubicacion, Direccion direccion)
+        public Turnero(string idPropietario, string concepto, Direccion direccion, int cantidad=0)
         {
-            PropietarioId = propietarioId;
+            IdPropietario = idPropietario;
             Concepto = concepto;
-            Ubicacion = ubicacion;
             Direccion = direccion;
+            Qr = GenerarQr();
             _turnos = new List<Turno>();
+            CantidadMaxima = cantidad;
         }
 
-        public Turnero(int propietarioId, string concepto, Direccion direccion, LatLon ubicacion)
+        string GenerarQr()
         {
-            PropietarioId = propietarioId;
-            Concepto = concepto;
-            Ubicacion = ubicacion;
-            Direccion = direccion;
-            _turnos = new List<Turno>();
+            QRCodeGenerator qrGenerator = new QRCodeGenerator();
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(GetQRHash(), QRCodeGenerator.ECCLevel.Q);
+            return new Base64QRCode(qrCodeData).GetGraphic(20);
         }
 
+        string GetQRHash()
+        {
+            return IdPropietario + Concepto + Direccion.Ciudad + Direccion.Calle + Direccion.Numero.ToString();
+        }
         public Turno ExpedirTurno()
         {
             var turno = new Turno()

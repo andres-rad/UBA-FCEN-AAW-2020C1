@@ -14,9 +14,9 @@ namespace Aplicacion.UseCases.Propietario
             _repository = repo;
         }
 
-        public ListarTurneroResponse Procesar(/*ListarTurneroRequest request*/)
+        public ListarTurneroResponse Procesar(ListarTurneroRequest request)
         {
-            var turneros = _repository.Turneros./*Where(t => t.PropietarioId == request.IdPropietario).*/ToList();
+            var turneros = _repository.Turneros.Where(t => t.IdPropietario == request.IdPropietario).ToList();
             var turnerosList = turneros.ConvertAll(new Converter<Turnero, ListarTurneroDTO>(TurneroToListarTurneroDTO));
             var response = new ListarTurneroResponse { turneros = turnerosList };
             return response;
