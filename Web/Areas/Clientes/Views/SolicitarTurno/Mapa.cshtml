@@ -1,61 +1,64 @@
 ﻿@using Aplicacion.UseCases.Cliente
 @model List<ListarTurneroMapaDTO>
+@{
+    ViewData["Area"] = "Clientes";
+}
 
 
-    <main>
-        <button onclick="cargar()">Cargar Turneros</button>
+<main>
+    <button onclick="cargar()">Cargar Turneros</button>
 
-        <div id="buscarTurneroMap" style="height:250px"></div>
-        <script src="https://openlayers.org/api/OpenLayers.js"></script>
-        <script>
-            var zoom = 13;
-            var a = 0;
-            var lat = -34.6389837;
-            var lon = -58.6836315;
-            var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
-            var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-            var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+    <div id="buscarTurneroMap" style="height:250px"></div>
+    <script src="https://openlayers.org/api/OpenLayers.js"></script>
+    <script>
+        var zoom = 13;
+        var a = 0;
+        var lat = -34.6389837;
+        var lon = -58.6836315;
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+        var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
 
-            map = new OpenLayers.Map("buscarTurneroMap");
-            var mapnik = new OpenLayers.Layer.OSM();
-            map.addLayer(mapnik);
+        map = new OpenLayers.Map("buscarTurneroMap");
+        var mapnik = new OpenLayers.Layer.OSM();
+        map.addLayer(mapnik);
 
-            map.setCenter(position, zoom);
+        map.setCenter(position, zoom);
 
-            function cargar(id, concepto) {
-                
-                var lat = null;
-                var lon = null;
-                if (a == 0) {
-                    lat = -34.6389837;
-                    lon = -58.6836315;
-                    a = 1;
-                }
-                else {
-                    lat =-34.6489837
-                     lon=    - 58.6936315
-                }
-                
+        function cargar(id, concepto) {
 
-                var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
-                var markers = new OpenLayers.Layer.Markers("Markers");
-                map.addLayer(markers);
-
-                var marker = new OpenLayers.Marker(position);
-                marker.id = id;
-                marker.icon.imageDiv.title = concepto;
-
-                marker.events.register("click", marker, function () {
-                    alert("ok");
-                });
-                markers.addMarker(marker);
-
+            var lat = null;
+            var lon = null;
+            if (a == 0) {
+                lat = -34.6389837;
+                lon = -58.6836315;
+                a = 1;
+            }
+            else {
+                lat = -34.6489837
+                lon = - 58.6936315
             }
 
 
-        </script>
-        @foreach (var turnero in Model)
-        {
-    <script> cargar(@turnero.Id,"@turnero.Concepto", @turnero.Ubicacion.Latitud, @turnero.Ubicacion.Longitud)</script>
+            var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+            var markers = new OpenLayers.Layer.Markers("Markers");
+            map.addLayer(markers);
+
+            var marker = new OpenLayers.Marker(position);
+            marker.id = id;
+            marker.icon.imageDiv.title = concepto;
+
+            marker.events.register("click", marker, function () {
+                alert("ok");
+            });
+            markers.addMarker(marker);
+
         }
-    </main>
+
+
+    </script>
+    @foreach (var turnero in Model)
+    {
+        <script> cargar(@turnero.Id,"@turnero.Concepto", @turnero.Ubicacion.Latitud, @turnero.Ubicacion.Longitud)</script>
+    }
+</main>

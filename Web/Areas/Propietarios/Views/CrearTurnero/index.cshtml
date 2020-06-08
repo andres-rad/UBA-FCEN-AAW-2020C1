@@ -1,7 +1,9 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @using Web.Areas.Propietarios.Models
 @model CrearTurneroVM
-
+@{ 
+    ViewData["Area"] = "Propietarios";
+}
 <h1>Crear Turnero</h1>
 
 <form asp-action="Crear" method="post" name="crearTurneroForm">

@@ -1,6 +1,8 @@
 ﻿@using Aplicacion.UseCases.Propietario
 @model List<ListarTurneroDTO>
-
+@{
+    ViewData["Area"] = "Propietarios";
+}
 
 <main>
     <div class="row">
@@ -17,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var turnero in Model)
+                    @foreach (var turnero in Model)
                     {
                         <tr>
                             <td> @turnero.Concepto </td>
@@ -27,7 +29,8 @@
                                     "Detalle",
                                     "Index",
                                     "DetalleTurnero",
-                                    new {
+                                    new
+                                         {
                                         idTurnero = turnero.Id
                                     },
                                     null

@@ -1,5 +1,8 @@
 ﻿@using Aplicacion.UseCases.Propietario
 @model DetalleTurneroResponse
+@{
+    ViewData["Area"] = "Propietarios";
+}
 <main>
     <div class="row">
         <div class="col-6 border-right">
@@ -24,7 +27,7 @@
                         Capacidad máxima: @(Model.CantidadMaxima == 0 ? "Sin límite" : Model.CantidadMaxima.ToString())
                     </div>
                 </div>
-                <hr class="w-100"/>
+                <hr class="w-100" />
                 <div class="col-8 offset-2">
                     <div class="row">
                         <div class="col-12 h4 text-center">
