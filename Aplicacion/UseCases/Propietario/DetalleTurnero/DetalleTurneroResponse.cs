@@ -15,7 +15,7 @@ namespace Aplicacion.UseCases.Propietario
         public string Calle { get; }
         public int Numero { get; }
         public string Qr { get; }
-
+        public int CantidadMaxima { get; set; }
         public DetalleTurneroResponse(Turnero turnero)
         {
             Id = turnero.Id;
@@ -25,6 +25,7 @@ namespace Aplicacion.UseCases.Propietario
             Calle = turnero.Direccion.Calle;
             Numero = turnero.Direccion.Numero;
             Qr = turnero.Qr;
+            CantidadMaxima = turnero.CantidadMaxima;
         }
     }
 }

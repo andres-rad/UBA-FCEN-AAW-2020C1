@@ -32,7 +32,8 @@ namespace Web.Areas.Propietarios.Controllers
                 Ciudad = turnero.Ciudad,
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,
-                Concepto = turnero.Concepto
+                Concepto = turnero.Concepto,
+                CantidadMaxima = turnero.CantidadMaxima 
             };
 
             uc.Procesar(req);

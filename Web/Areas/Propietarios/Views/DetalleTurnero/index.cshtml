@@ -19,6 +19,11 @@
                         @Model.Calle @Model.Numero
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="h3">
+                        Capacidad máxima: @(Model.CantidadMaxima == 0 ? "Sin límite" : Model.CantidadMaxima.ToString())
+                    </div>
+                </div>
                 <hr class="w-100"/>
                 <div class="col-8 offset-2">
                     <div class="row">

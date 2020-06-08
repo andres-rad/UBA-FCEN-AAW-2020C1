@@ -25,11 +25,25 @@ namespace Aplicacion.UseCases.Propietario
                 Numero = req.Numero
             };
 
-            var turnero = new Turnero(
-                req.IdPropietario,
-                req.Concepto,
-                direccion
-            );
+            Turnero turnero;
+
+            if(req.CantidadMaxima == 0)
+            {
+               turnero = new Turnero(
+                    req.IdPropietario,
+                    req.Concepto,
+                    direccion
+                );
+            } 
+            else
+            {
+                turnero = new Turnero(
+                    req.IdPropietario,
+                    req.Concepto,
+                    direccion,
+                    req.CantidadMaxima
+                );
+            }
 
             _repository.Turneros.Add(turnero);
             _repository.SaveChanges();

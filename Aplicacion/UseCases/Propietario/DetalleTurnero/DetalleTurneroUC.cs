@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class DetalleTurneroUC
+    public class DetalleTurneroUC : IUseCase
     {
         IRepository _repository;
 

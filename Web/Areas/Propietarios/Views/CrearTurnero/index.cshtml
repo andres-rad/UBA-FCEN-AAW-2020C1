@@ -4,7 +4,7 @@
 
 <h1>Crear Turnero</h1>
 
-<form asp-action="Crear" method="post">
+<form asp-action="Crear" method="post" name="crearTurneroForm">
     <div class="form-group">
         <label for="conceptoInput">Descripción</label>
         <input type="text"
@@ -31,8 +31,8 @@
             <input type="text"
                    id="inputCalle"
                    class="form-control"
-                   name="calle" 
-                   asp-for="Calle"/>
+                   name="calle"
+                   asp-for="Calle" />
         </div>
         <div class="form-group col-md-2">
             <label for="inputNumero">Altura</label>
@@ -43,6 +43,16 @@
                    name="numero"
                    asp-for="Numero">
         </div>
+    </div>
+    <div class="form-group">
+        <label for="inputCapacidad"> Capacidad máxima </label>
+        <input type="number"
+               class="form-control"
+               id="inputCapacidad"
+               min="1"
+               placeholder="Tamaño de la cola"
+               name="CantidadMaxima"
+               asp-for="CantidadMaxima"/>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

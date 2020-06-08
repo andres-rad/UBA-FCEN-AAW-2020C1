@@ -13,17 +13,19 @@ namespace Domain
         public LatLon Ubicacion { get; internal set; }
         public Direccion Direccion{ get; internal set; }
         public string Qr { get; internal set; }
+        public int CantidadMaxima { get; set; }
 
         List<Turno> _turnos;
 
         private Turnero() { }
-        public Turnero(string idPropietario, string concepto, Direccion direccion)
+        public Turnero(string idPropietario, string concepto, Direccion direccion, int cantidad=0)
         {
             IdPropietario = idPropietario;
             Concepto = concepto;
             Direccion = direccion;
             Qr = GenerarQr();
             _turnos = new List<Turno>();
+            CantidadMaxima = cantidad;
         }
 
         string GenerarQr()
