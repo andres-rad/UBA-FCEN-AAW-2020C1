@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace Web.Areas.Propietarios.Controllers
 {
     [Area("Propietarios")]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class DetalleTurneroController : Controller
     {
         public IActionResult Index(int idTurnero, [FromServices] DetalleTurneroUC uc)

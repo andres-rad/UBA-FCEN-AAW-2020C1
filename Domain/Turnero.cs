@@ -12,7 +12,6 @@ namespace Domain
         public string Concepto { get; internal set; }
         public LatLon Ubicacion { get; internal set; }
         public Direccion Direccion{ get; internal set; }
-        public string Qr { get; internal set; }
         public int CantidadMaxima { get; set; }
 
         List<Turno> _turnos;
@@ -24,28 +23,13 @@ namespace Domain
             Concepto = concepto;
             Direccion = direccion;
             Ubicacion = ubicacion;
-            Qr = GenerarQr();
             _turnos = new List<Turno>();
             CantidadMaxima = cantidad;
         }
 
-        string GenerarQr()
+        public Turno ExpedirTurno(string email)
         {
-            QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(GetQRHash(), QRCodeGenerator.ECCLevel.Q);
-            return new Base64QRCode(qrCodeData).GetGraphic(20);
-        }
-
-        string GetQRHash()
-        {
-            return IdPropietario + Concepto + Direccion.Ciudad + Direccion.Calle + Direccion.Numero.ToString();
-        }
-        public Turno ExpedirTurno()
-        {
-            var turno = new Turno()
-            {
-
-            };
+            var turno = new Turno(_turnos.Count + 1, this.Id, _turnos.Count + 1, email);
 
             _turnos.Add(turno);
 

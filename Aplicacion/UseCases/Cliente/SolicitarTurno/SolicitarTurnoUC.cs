@@ -27,14 +27,14 @@ namespace Aplicacion.UseCases.Cliente
                 throw new Exception("Turnero no existente");
             }
 
-            var turno = turnero.ExpedirTurno();
+            var turno = turnero.ExpedirTurno(request.Email);
 
             _repository.SaveChanges();
 
             var response = new SolicitarTurnoResponse
             {
                 Concepto = turnero.Concepto,
-                QR = _qrp.Encode(turno.ToString())
+                QR = _qrp.Encode(turno.Id.ToString())
             };
 
             return response;
