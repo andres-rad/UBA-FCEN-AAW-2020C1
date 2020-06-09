@@ -17,6 +17,9 @@ namespace Web.Areas.Propietarios.Controllers
         {
             var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
             var turnero = uc.Procesar(req);
+
+            //TO-DO: Agregar DetalleTurneroVM
+
             return View(turnero);
         }
     }

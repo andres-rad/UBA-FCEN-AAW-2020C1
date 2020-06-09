@@ -4,8 +4,8 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class ListarTurneroResponse
+    public class ListarTurnerosResponse
     {
-        public List<ListarTurneroDTO> turneros;
+        public List<ListarTurnerosDTO> turneros;
     }
 }

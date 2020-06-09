@@ -4,6 +4,7 @@ using Dominio;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml;
 
 namespace Aplicacion.UseCases.Propietario
 {
@@ -27,25 +28,13 @@ namespace Aplicacion.UseCases.Propietario
 
             Turnero turnero;
 
-            if(req.CantidadMaxima == 0)
-            {
-               turnero = new Turnero(
-                    req.IdPropietario,
-                    req.Concepto,
-                    req.Ubicacion,
-                    direccion
-                );
-            } 
-            else
-            {
-                turnero = new Turnero(
-                    req.IdPropietario,
-                    req.Concepto,
-                    req.Ubicacion,
-                    direccion,
-                    req.CantidadMaxima
-                );
-            }
+            turnero = new Turnero(
+                 req.IdPropietario,
+                 req.Concepto,
+                 req.Ubicacion,
+                 direccion,
+                 req.CantidadMaxima == 0 ? int.MaxValue : req.CantidadMaxima
+             );
 
             _repository.Turneros.Add(turnero);
             _repository.SaveChanges();

@@ -19,9 +19,9 @@ namespace Web.Areas.Propietarios.Controllers
         {
             _userService = cus;
         }
-        public ActionResult Index([FromServices] ListarTurneroUC uc)
+        public ActionResult Index([FromServices] ListarTurnerosUC uc)
         {
-            var response = uc.Procesar(new ListarTurneroRequest { IdPropietario = _userService.UserId });
+            var response = uc.Procesar(new ListarTurnerosRequest { IdPropietario = _userService.UserId });
             
             return View(response.turneros);
         }

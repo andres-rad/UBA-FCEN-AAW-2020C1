@@ -17,14 +17,15 @@ namespace Domain
         List<Turno> _turnos;
 
         private Turnero() { }
-        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidad=0)
+
+        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaximaGenteEnEspera)
         {
             IdPropietario = idPropietario;
             Concepto = concepto;
             Direccion = direccion;
             Ubicacion = ubicacion;
             _turnos = new List<Turno>();
-            CantidadMaxima = cantidad;
+            CantidadMaxima = cantidaMaximaGenteEnEspera;
         }
 
         public Turno ExpedirTurno(string email)

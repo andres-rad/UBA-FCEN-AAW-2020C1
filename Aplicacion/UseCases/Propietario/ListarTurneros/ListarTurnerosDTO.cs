@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class ListarTurneroDTO
+    public class ListarTurnerosDTO
     {
         public int Id { get; set; }
 
@@ -15,7 +15,7 @@ namespace Aplicacion.UseCases.Propietario
         public string Calle { get; set; }
         public int Numero { get; set; }
 
-        public ListarTurneroDTO(Turnero turnero)
+        public ListarTurnerosDTO(Turnero turnero)
         {
             Id = turnero.Id;
             IdPropietario = turnero.IdPropietario;
