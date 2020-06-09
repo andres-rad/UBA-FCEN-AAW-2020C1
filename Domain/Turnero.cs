@@ -13,7 +13,7 @@ namespace Domain
         public LatLon Ubicacion { get; internal set; }
         public Direccion Direccion{ get; internal set; }
         public string Qr { get; internal set; }
-        public int CantidadMaxima { get; set; }
+        public int CantidadMaxima { get; internal set; }
 
         List<Turno> _turnos;
 
@@ -29,6 +29,13 @@ namespace Domain
             CantidadMaxima = cantidad;
         }
 
+        public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad) {
+            Concepto = concepto;
+            Ubicacion = ubicacion;
+            Direccion = direccion;
+            CantidadMaxima = cantidad;
+        }
+        
         string GenerarQr()
         {
             QRCodeGenerator qrGenerator = new QRCodeGenerator();

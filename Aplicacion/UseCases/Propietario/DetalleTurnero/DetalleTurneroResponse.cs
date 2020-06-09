@@ -16,6 +16,8 @@ namespace Aplicacion.UseCases.Propietario
         public int Numero { get; }
         public string Qr { get; }
         public int CantidadMaxima { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
         public DetalleTurneroResponse(Turnero turnero)
         {
             Id = turnero.Id;
@@ -26,6 +28,8 @@ namespace Aplicacion.UseCases.Propietario
             Numero = turnero.Direccion.Numero;
             Qr = turnero.Qr;
             CantidadMaxima = turnero.CantidadMaxima;
+            Longitud = turnero.Ubicacion.Latitud;
+            Latitud = turnero.Ubicacion.Longitud;
         }
     }
 }

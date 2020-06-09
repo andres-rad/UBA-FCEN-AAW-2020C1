@@ -1,0 +1,112 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Web.Areas.Propietarios.Models
+@using Aplicacion.UseCases.Propietario
+@model EditarTurneroVM
+@{ 
+    ViewData["Area"] = "Propietarios";
+}
+<h1>Editar Turnero</h1>
+
+<form asp-action="Editar" method="post" name="editarTurneroForm">
+    <div class="form-group">
+        <label for="conceptoInput">Descripción</label>
+        <input type="text"
+               class="form-control"
+               id="conceptoInput"
+               aria-describedby="concepto"
+               placeholder="Descripción del servicio"
+               name="concepto"
+               asp-for="Concepto">
+    </div>
+    <h4> Dirección </h4>
+    <hr />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputCiudad">Ciudad</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputCiudad"
+                   name="ciudad"
+                   asp-for="Ciudad" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputCalle">Calle</label>
+            <input type="text"
+                   id="inputCalle"
+                   class="form-control"
+                   name="calle"
+                   asp-for="Calle" />
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputNumero">Altura</label>
+            <input type="number"
+                   class="form-control"
+                   id="inputNumero"
+                   min="1"
+                   name="numero"
+                   asp-for="Numero">
+        </div>
+        <div class="form-group col-md-7">
+            <label for="inputNumero">Lat</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputLatitud"
+                   name="latitud"
+                   asp-for="Latitud">
+        </div>
+        <div class="form-group col-md-8">
+            <label for="inputNumero">Lon</label>
+            <input type="text"
+                   class="form-control"
+                   id="inputLongitud"
+                   name="longitud"
+                   asp-for="Longitud">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputCapacidad"> Capacidad máxima </label>
+        <input type="number"
+               class="form-control"
+               id="inputCapacidad"
+               min="1"
+               placeholder="Tamaño de la cola"
+               name="CantidadMaxima"
+               asp-for="CantidadMaxima" />
+    </div>
+    <div class="form-group">
+        <label for="inputIdTurnero"></label>
+        <input type="hidden"
+               class="form-control"
+               id="inputIdTurnero"
+               min="0"
+               name="IdTurnero"
+               asp-for="IdTurnero" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+    <div id="buscarTurneroMap" style="height:400px"></div>
+    <script src="https://openlayers.org/api/OpenLayers.js"></script>
+    <script>
+        /////////////////////////////////////////////////////////
+        // FACTORIZAR
+        var zoom = 12;
+        var latIni = -34.6302673;
+        var lonIni = -58.4356537;
+        var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+        var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+        var positionIni = new OpenLayers.LonLat(lonIni, latIni).transform(fromProjection, toProjection);
+
+        map = new OpenLayers.Map("buscarTurneroMap");
+        var mapnik = new OpenLayers.Layer.OSM();
+        map.addLayer(mapnik);
+
+        map.setCenter(positionIni, zoom);
+
+        map.events.register('click', map, handleClick);
+
+        function handleClick(e) {
+            var lonlat = map.getLonLatFromViewPortPx(e.xy);
+            $("#inputLatitud").val(lonlat.lat);
+            $("#inputLongitud").val(lonlat.lon);
+        }
+    </script>
+</form>

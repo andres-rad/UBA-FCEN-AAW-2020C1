@@ -65,6 +65,17 @@
             </div>
         </div>
     </div>
+    <div>
+        @Html.ActionLink(
+            "Editar",
+            "Index",
+            "EditarTurnero",
+            new
+            {
+                idTurnero = @Model.Id
+            },
+            null)
+    </div>
 </main>
 <script src="@Url.Content("~/Scripts/qrReader.js")" type="text/javascript"></script>
 
