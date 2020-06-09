@@ -102,6 +102,8 @@
         map.setCenter(positionIni, zoom);
 
         map.events.register('click', map, handleClick);
+        map.events.register('touchstart', map, handleClick);
+
 
         function handleClick(e) {
             var lonlat = map.getLonLatFromViewPortPx(e.xy);
