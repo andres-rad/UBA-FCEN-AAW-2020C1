@@ -12,8 +12,10 @@ namespace Domain
         public string IdPropietario { get; internal set; }
         public string Concepto { get; internal set; }
         public LatLon Ubicacion { get; internal set; }
-        public Direccion Direccion{ get; internal set; }
+        public Direccion Direccion { get; internal set; }
         public int CantidadMaxima { get; internal set; }
+
+        public int ProximoId { get; internal set; }
 
         List<Turno> _turnos;
 
@@ -27,6 +29,7 @@ namespace Domain
             Ubicacion = ubicacion;
             _turnos = new List<Turno>();
             CantidadMaxima = cantidaMaxima;
+            ProximoId = 1;
         }
 
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
@@ -42,8 +45,8 @@ namespace Domain
             if (_turnos.Count == CantidadMaxima) 
                 throw new Exception("Cantidad maxima alcanzada, no se puede expedir turnos por el momento");
 
-            var turno = new Turno(_turnos.Count + 1, this.Id, _turnos.Count + 1, email);
-
+            var turno = new Turno(ProximoId, this.Id, _turnos.Count + 1, email);
+            ProximoId += 1;
             _turnos.Add(turno);
 
             return turno;
@@ -63,6 +66,19 @@ namespace Domain
         {
             var turno = _turnos.Find(turno => turno.Id == idTurno);
             _turnos.Remove(turno);
+        }
+        
+        public void Demorar()
+        {
+            var turno = ProximoTurno();
+            Avanzar();
+            _turnos.Insert(1, turno);
+        }
+
+        public int IdSiguienteTurno()
+        {
+            return 1; //Hasta arreglar _turnos
+            return _turnos.FirstOrDefault().Id;
         }
     }
 }

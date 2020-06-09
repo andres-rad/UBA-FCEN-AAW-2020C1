@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Aplicacion.UseCases.Cliente;
+using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -35,13 +36,15 @@ namespace Web.Areas.Clientes.Controllers
         public IActionResult ProcesarQR(string data, [FromServices] LeerQrUC leerQrUC)
         {
             
-            return RedirectToAction(nameof(ConfirmarTurno), new { idTurero = 18765});
+            return RedirectToAction(nameof(ConfirmarTurno), new { idTurnero = Int32.Parse(data) });
         }
 
         [HttpGet]
-        public IActionResult ConfirmarTurno(string data)
+        public IActionResult ConfirmarTurno(int idTurnero, [FromServices] DetalleTurneroClienteUC uc)
         {
-            return View();
+            var req = new DetalleTurneroClienteRequest { IdTurnero = idTurnero };
+            var turneroData = uc.Procesar(req);
+            return View(turneroData);
         }
 
 

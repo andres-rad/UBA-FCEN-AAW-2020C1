@@ -10,7 +10,6 @@ namespace Domain
         public int TurneroId { get; internal set; }
         public int Numero { get; internal set; }
         public string Email { get; internal set; }
-
         public Turno(int id, int turneroId, int numero, string email)
         {
             Id = id;

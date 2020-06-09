@@ -1,11 +1,12 @@
 ﻿@{
     ViewData["Area"] = "Clientes";
 }
-
+@using Aplicacion.UseCases.Cliente 
+@model DetalleTurneroClienteResponse 
 
 <div class="row">
     <div class="col-6">
-        <h1>Turnero XYZ</h1>
+        <h1>Turnero @Model.Concepto</h1>
     </div>
     <div class="col-6">
         <h2>7 personas en la fila</h2>
@@ -15,6 +16,7 @@
     <form method="post" asp-action="ConfirmarTurno">
         <p><input type="checkbox" /> Enviarme la informacion por mail</p>
         <input type="email" id="email" name="email" />
+        <input type="hidden" id="idTurnero" name="idTurnero" value="@Model.Id" />
         <button type="submit" class="btn-primary">Pedir el turno</button>
     </form>
 </div>
