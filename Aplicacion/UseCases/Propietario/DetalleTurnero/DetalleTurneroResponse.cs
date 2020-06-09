@@ -16,5 +16,7 @@ namespace Aplicacion.UseCases.Propietario
         public int Numero { get; set; }
         public string Qr { get; set; }
         public int CantidadMaxima { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
     }
 }

@@ -24,7 +24,8 @@
                 </div>
                 <div class="col-12">
                     <div class="h3">
-                        Capacidad máxima: @(Model.CantidadMaxima == 0 ? "Sin límite" : Model.CantidadMaxima.ToString())
+                        @* Esta logica va al controller, que pasa por el VM el valor ya producido *@
+                        Capacidad máxima: @(Model.CantidadMaxima == int.MaxValue ? "Sin límite" : Model.CantidadMaxima.ToString())
                     </div>
                 </div>
                 <hr class="w-100" />
@@ -64,6 +65,17 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div>
+        @Html.ActionLink(
+            "Editar",
+            "Index",
+            "EditarTurnero",
+            new
+            {
+                idTurnero = @Model.Id
+            },
+            null)
     </div>
 </main>
 <script src="@Url.Content("~/Scripts/qrReader.js")" type="text/javascript"></script>

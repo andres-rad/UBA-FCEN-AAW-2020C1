@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using QRCoder;
+using System;
 
 namespace Domain
 {
@@ -12,24 +13,35 @@ namespace Domain
         public string Concepto { get; internal set; }
         public LatLon Ubicacion { get; internal set; }
         public Direccion Direccion{ get; internal set; }
-        public int CantidadMaxima { get; set; }
+        public int CantidadMaxima { get; internal set; }
 
         List<Turno> _turnos;
 
         private Turnero() { }
 
-        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaximaGenteEnEspera)
+        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaxima)
         {
             IdPropietario = idPropietario;
             Concepto = concepto;
             Direccion = direccion;
             Ubicacion = ubicacion;
             _turnos = new List<Turno>();
-            CantidadMaxima = cantidaMaximaGenteEnEspera;
+            CantidadMaxima = cantidaMaxima;
+        }
+
+        public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
+        {
+            Concepto = concepto;
+            Ubicacion = ubicacion;
+            Direccion = direccion;
+            CantidadMaxima = cantidad;
         }
 
         public Turno ExpedirTurno(string email)
         {
+            if (_turnos.Count == CantidadMaxima) 
+                throw new Exception("Cantidad maxima alcanzada, no se puede expedir turnos por el momento");
+
             var turno = new Turno(_turnos.Count + 1, this.Id, _turnos.Count + 1, email);
 
             _turnos.Add(turno);

@@ -36,6 +36,18 @@
                                     null
                                 )
                             </td>
+                            <td>
+                                @Html.ActionLink(
+                                    "Editar",
+                                    "Index",
+                                    "EditarTurnero",
+                                    new
+                                    {
+                                        idTurnero = turnero.Id
+                                    },
+                                    null
+                                )
+                            </td>
                         </tr>
                     }
                 </tbody>
