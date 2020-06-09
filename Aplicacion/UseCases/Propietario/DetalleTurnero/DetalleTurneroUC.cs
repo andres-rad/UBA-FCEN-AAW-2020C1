@@ -29,6 +29,7 @@ namespace Aplicacion.UseCases.Propietario
             {
                 Id = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
+                IdSiguienteTurno = turnero.IdSiguienteTurno().ToString(),
                 Concepto = turnero.Concepto,
                 Ciudad = turnero.Direccion.Ciudad,
                 Calle = turnero.Direccion.Calle,

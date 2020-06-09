@@ -8,8 +8,10 @@ namespace Aplicacion.UseCases.Propietario
 {
     public class DetalleTurneroResponse
     {
-        public int Id { get; set;  }
+        public int Id { get; set; }
         public string IdPropietario { get; set; }
+        public string IdSiguienteTurno { get; set; }
+
         public string Concepto { get; set; }
         public string Ciudad { get; set; }
         public string Calle { get; set; }
