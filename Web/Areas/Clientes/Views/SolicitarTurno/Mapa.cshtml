@@ -40,7 +40,7 @@
     var markers = new OpenLayers.Layer.Markers("Markers");
     map.addLayer(markers);
 
-    var confirmarTurnoAddess = "@Url.Link("Default", new { Area = "Clientes",  Controller = "SolicitarTurno", Action = "ConfirmarTurno"})"
+    var buildAddress = (idTurnero) => `@Url.Link("Default", new { Area = "Clientes",  Controller = "SolicitarTurno", Action = "ConfirmarTurno"})/?idTurnero=${idTurnero}`
     var turneros = @Html.Raw(@JsonConvert.SerializeObject(Model))
 
 
@@ -57,7 +57,9 @@
             $("#descripcionTurnero").text(concepto);
             $("#direccionTurnero").text(direccion);
             $("#idTurnero").val(id);
-            $("#confirmarTurneroLink").attr("href", `${confirmarTurnoAddess}/${id}`);
+
+            
+            $("#confirmarTurneroLink").attr("href", buildAddress(id) );
 
             $("#buscarTurneroDataPanel").removeClass('hidden');
         });
