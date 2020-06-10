@@ -15,11 +15,12 @@ namespace Domain
         public Direccion Direccion { get; internal set; }
         public int CantidadMaxima { get; internal set; }
 
-        public int ProximoId { get; internal set; }
+        public int UltimoNumero { get; internal set; }
 
-        List<Turno> _turnos;
+        public  List<Turno> _turnos {  get;  internal set; } 
 
-        private Turnero() { }
+        private Turnero() {
+        }
 
         public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaxima)
         {
@@ -29,7 +30,12 @@ namespace Domain
             Ubicacion = ubicacion;
             _turnos = new List<Turno>();
             CantidadMaxima = cantidaMaxima;
-            ProximoId = 1;
+            UltimoNumero = 0;
+        }
+
+        public object DetalleTurno(object idTurno)
+        {
+            throw new NotImplementedException();
         }
 
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
@@ -44,9 +50,10 @@ namespace Domain
         {
             if (_turnos.Count == CantidadMaxima) 
                 throw new Exception("Cantidad maxima alcanzada, no se puede expedir turnos por el momento");
+            
+            UltimoNumero++;
 
-            var turno = new Turno(ProximoId, this.Id, _turnos.Count + 1, email);
-            ProximoId += 1;
+            var turno = new Turno(Id, UltimoNumero, email);
             _turnos.Add(turno);
 
             return turno;
@@ -59,7 +66,8 @@ namespace Domain
 
         public void Avanzar()
         {
-            _turnos.RemoveAt(0);
+            if(_turnos.Count > 0)
+                _turnos.RemoveAt(0);
         }
 
         public void Cancelar(int idTurno)
@@ -75,10 +83,28 @@ namespace Domain
             _turnos.Insert(1, turno);
         }
 
-        public int IdSiguienteTurno()
+        public Turno Proximo()
         {
-            return 1; //Hasta arreglar _turnos
-            return _turnos.FirstOrDefault().Id;
+            return _turnos.FirstOrDefault();
         }
+
+        public int CantidadEnEspera()
+        {
+            return _turnos.Count;
+        }
+
+        public Turno Turno(int idTurno)
+        {
+            return _turnos.FirstOrDefault(t => t.Id == idTurno);
+        }
+
+        public int EsperaParaTurno(int idTurno)
+        {
+            var turno = _turnos.FirstOrDefault(t => t.Id == idTurno);
+
+            return _turnos.IndexOf(turno);
+        }
+
+
     }
 }

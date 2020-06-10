@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Areas\Propietarios\Views\DetalleTurnero\index.cshtml" />
     <Content Remove="Areas\Propietarios\Views\Home\index.cshtml" />
   </ItemGroup>
 
@@ -30,12 +29,11 @@
 
   <ItemGroup>
     <Folder Include="Areas\Clientes\Data\" />
-    <Folder Include="Areas\Clientes\Models\" />
     <Folder Include="Areas\Propietarios\Data\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Areas\Propietarios\Views\DetalleTurnero\index.cshtml" />
+    <None Include="Areas\Propietarios\Views\Turnero\Detalle.cshtml" />
     <None Include="Areas\Propietarios\Views\Home\index.cshtml" />
   </ItemGroup>
 

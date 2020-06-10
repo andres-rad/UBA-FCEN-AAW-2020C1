@@ -1,0 +1,43 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var informacionTurnero = ViewData["InformacionTurnero"];
+}
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+
+                @{ await Html.RenderPartialAsync("_InformacionTurneroPartial.cshtml", informacionTurnero, new ViewDataDictionary(ViewData));}
+
+                <div class="col-sm-12 col-md-6">
+                    <div class="jumbotron d-flex flex-column justify-content-between " style="width:100%; height:100%">
+
+                            <h1 class="h1 text-center ">
+                                Siguiente turno: @Model.SiguienteTurno_Numero
+                            </h1>
+                            <form id="qr_form" asp-action="ProcesarQR" method="post">
+                                <div id="reader"></div>
+                                <input class="text-center" type="text" id="qrdata" name="data" hidden />
+                            </form>
+                            <div class="btn-toolbar justify-content-around align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+                                @Html.ActionLink(
+                                    "Volver",
+                                    "CancelarTurno",
+                                    "DetalleTurnero",
+                                    new
+                                    {
+                                        idTurno = @Model.SiguienteTurno_Id,
+                                        idTurnero = @Model.Id,
+
+                                    },
+                                    new { @class = "btn btn-danger" }
+                                    )
+                            </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>

@@ -14,6 +14,7 @@ namespace Aplicacion.UseCases.Propietario
         public string Ciudad { get; set; }
         public string Calle { get; set; }
         public int Numero { get; set; }
+        public int CantidadEnEspera { get; set; }
 
         public ListarTurnerosDTO(Turnero turnero)
         {
@@ -23,6 +24,7 @@ namespace Aplicacion.UseCases.Propietario
             Ciudad = turnero.Direccion.Ciudad;
             Calle = turnero.Direccion.Calle;
             Numero = turnero.Direccion.Numero;
+            CantidadEnEspera = turnero.CantidadEnEspera();
         }
     }
 }

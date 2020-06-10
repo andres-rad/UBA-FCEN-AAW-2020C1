@@ -1,6 +1,9 @@
 ﻿using Aplicacion.Interfaces;
+using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
@@ -18,18 +21,22 @@ namespace Aplicacion.UseCases.Propietario
 
         public DetalleTurneroResponse Procesar(DetalleTurneroRequest req)
         {
-            var turnero = _repository.Turneros.Find(req.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
 
             if(turnero == null)
             {
                 throw new Exception("Turnero no encontrado");
             }
 
+            var proximoTurno = turnero.Proximo();
+
             return new DetalleTurneroResponse()
             {
                 Id = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
-                IdSiguienteTurno = turnero.IdSiguienteTurno().ToString(),
+                CantidadEnEspera = turnero.CantidadEnEspera(),
+                SiguienteTurno_Id = proximoTurno?.Id.ToString(),
+                SiguienteTurno_Numero = proximoTurno?.Numero.ToString(),
                 Concepto = turnero.Concepto,
                 Ciudad = turnero.Direccion.Ciudad,
                 Calle = turnero.Direccion.Calle,

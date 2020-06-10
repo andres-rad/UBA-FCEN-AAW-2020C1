@@ -9,55 +9,65 @@
         <h1>
             Mis Turneros
         </h1>
-        <div class="col-12">
-            <table class="table" style="display: @(Model.Count == 0 ? "none" : "block")">
-                <thead>
-                    <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Direccion</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var turnero in Model)
-                    {
+        <div class="col-12" style="margin-top: 10px">
+            @if (@Model.Count == 0)
+            {
+                <div class="jumbotron">
+                    <h1>Aún no creo ningún turnero</h1>
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover table-striped " style="width:100%">
+                    <thead>
                         <tr>
-                            <td> @turnero.Concepto </td>
-                            <td> @turnero.Ciudad - @turnero.Calle @turnero.Numero </td>
-                            <td>
-                                @Html.ActionLink(
-                                    "Detalle",
-                                    "Index",
-                                    "DetalleTurnero",
-                                    new
-                                         {
-                                        idTurnero = turnero.Id
-                                    },
-                                    null
-                                )
-                            </td>
-                            <td>
-                                @Html.ActionLink(
-                                    "Editar",
-                                    "Index",
-                                    "EditarTurnero",
-                                    new
-                                    {
-                                        idTurnero = turnero.Id
-                                    },
-                                    null
-                                )
-                            </td>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Direccion</th>
+                            <th scope="col" class="text-center">Cantida de gente en espera</th>
+                            <th scope="col" colspan="2"></th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            <span style="display: @(Model.Count == 0 ? "block" : "none")">Aún no creo ningún turnero</span>
+                    </thead>
+                    <tbody>
+                        @foreach (var turnero in Model)
+                        {
+                            <tr>
+                                <td> @turnero.Concepto </td>
+                                <td> @turnero.Calle @turnero.Numero, @turnero.Ciudad</td>
+                                <td class="text-center"> @turnero.CantidadEnEspera</td>
+                                <td>
+                                    @Html.ActionLink(
+                                        "Detalle",
+                                        "Detalle",
+                                        "Turnero",
+                                        new
+                                             {
+                                            idTurnero = turnero.Id
+                                        },
+                                        null
+                                    )
+                                </td>
+                                <td>
+                                    @Html.ActionLink(
+                                        "Editar",
+                                        "Editar",
+                                        "Turnero",
+                                        new
+                                        {
+                                            idTurnero = turnero.Id
+                                        },
+                                        null
+                                    )
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
         </div>
     </div>
     <footer>
-        <form method="get" action="/Propietarios/CrearTurnero">
-            <button type="submit">Nuevo Turnero</button>
-        </form>
+        <div class="text-center justify-content-center">
+            <a role="button" class="btn btn-primary" asp-area="Propietarios" asp-controller="Turnero" asp-action="Crear">Nuevo Turnero</a>
+        </div>
     </footer>
 </main>

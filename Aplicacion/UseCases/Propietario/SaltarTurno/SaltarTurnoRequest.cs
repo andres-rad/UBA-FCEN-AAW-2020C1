@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Aplicacion.UseCases.Cliente
+namespace Aplicacion.UseCases.Propietario
 {
-    public class SolicitarTurnoResponse
+    public class SaltarTurnoRequest
     {
+        public int IdTurno { get; set; }
         public int IdTurnero { get; set; }
-        public int IdTurno  { get; set; }
     }
 }

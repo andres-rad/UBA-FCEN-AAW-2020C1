@@ -1,0 +1,68 @@
+﻿@model Web.Areas.Clientes.Models.DetalleTurnoVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h1>Turnero @Model.Concepto</h1>
+                <p>@Model.Direccion</p>
+
+                <div id="mapaTurnero" style="height:400px"></div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="row justify-content-center">
+                    <h1>Turno @Model.Numero</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <h2>@Model.EsperaEstimadaMsg</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <img class="img-fluid" src="data:image/jpeg;base64, @Model.Qr" alt="Codigo QR" />
+                </div>
+                <div class="row justify-content-center">
+                    <form>
+                        <input name="idTurno" hidden value="@Model.IdTurno" />
+                        <input name="idTurnero" hidden value="@Model.IdTurnero" />
+                        <div class="col-sm-12">
+                            <div class="btn-toolbar justify-content-around align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+                                <button class="btn btn-primary" type="submit" asp-action="Demorar">Demorar turno</button>
+                                <button class="btn btn-danger" type="submit" asp-action="Cancelar">Cancelar turno</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script src="https://openlayers.org/api/OpenLayers.js"></script>
+<script>
+    var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+
+    var zoom = 12;
+    var lat = @Model.Latitud;
+    var lon = @Model.Longitud;
+    var posTurnero = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+
+    var map = new OpenLayers.Map("mapaTurnero");
+    var mapnik = new OpenLayers.Layer.OSM();
+
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    var marker = new OpenLayers.Marker(posTurnero);
+    marker.id = @Model.IdTurnero;
+    marker.icon.imageDiv.title = "@Model.Concepto";
+    markers.addMarker(marker);
+
+    map.addLayer(mapnik);
+    map.addLayer(markers);
+    map.setCenter(posTurnero, zoom);
+
+</script>

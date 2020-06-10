@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,8 @@ namespace Aplicacion.UseCases.Cliente
 
         public CancelarTurnoResponse Procesar(CancelarTurnoRequest request)
         {
-            var turnero = _repository.Turneros.Single(turnero => turnero.Id == request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t=> t._turnos).Single(turnero => turnero.Id == request.IdTurnero);
+
             turnero.Cancelar(request.IdTurno);
 
             _repository.SaveChanges();
