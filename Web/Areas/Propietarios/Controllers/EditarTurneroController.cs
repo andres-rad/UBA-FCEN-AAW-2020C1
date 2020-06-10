@@ -9,7 +9,8 @@ using Dominio;
 namespace Web.Areas.Propietarios.Controllers
 {
     [Area("Propietarios")]
-    [Authorize]
+    //[Authorize]
+    [AllowAnonymous]
     public class EditarTurneroController : Controller
     {
         ICurrentUserService _userService;

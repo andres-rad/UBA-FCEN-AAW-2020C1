@@ -1,6 +1,8 @@
 ﻿using Aplicacion.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
@@ -18,7 +20,7 @@ namespace Aplicacion.UseCases.Cliente
 
         public DetalleTurneroClienteResponse Procesar(DetalleTurneroClienteRequest req)
         {
-            var turnero = _repository.Turneros.Find(req.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
 
             if(turnero == null)
             {

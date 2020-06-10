@@ -39,8 +39,11 @@ namespace Web
 
             services.AddScoped<IQRProvider, QRProvider>();
             services.AddScoped<IRepository, ApplicationDbContext>();
-            services.AddScoped<ICurrentUserService, CurrentUserService>();
 
+            // USAR CurrentUserService PARA PROBAR CON UN USUARIO LOGUEADO
+            // services.AddScoped<ICurrentUserService, CurrentUserService>();
+            services.AddScoped<ICurrentUserService, SeedCurrentUserService>();
+            
             services.AddHttpContextAccessor();
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
 

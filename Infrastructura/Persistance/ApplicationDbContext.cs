@@ -16,6 +16,5 @@ namespace Infrastructure.Persistance
         }
 
         public DbSet<Turnero> Turneros { get; set; }
-
     }
 }

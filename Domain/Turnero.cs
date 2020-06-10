@@ -17,9 +17,10 @@ namespace Domain
 
         public int ProximoId { get; internal set; }
 
-        List<Turno> _turnos;
+        public  List<Turno> _turnos {  get;  internal set; } 
 
-        private Turnero() { }
+        private Turnero() {
+        }
 
         public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaxima)
         {
@@ -45,7 +46,7 @@ namespace Domain
             if (_turnos.Count == CantidadMaxima) 
                 throw new Exception("Cantidad maxima alcanzada, no se puede expedir turnos por el momento");
 
-            var turno = new Turno(ProximoId, this.Id, _turnos.Count + 1, email);
+            var turno = new Turno(this.Id, _turnos.Count + 1, email);
             ProximoId += 1;
             _turnos.Add(turno);
 
@@ -59,7 +60,8 @@ namespace Domain
 
         public void Avanzar()
         {
-            _turnos.RemoveAt(0);
+            if(_turnos.Count > 0)
+                _turnos.RemoveAt(0);
         }
 
         public void Cancelar(int idTurno)
@@ -75,10 +77,9 @@ namespace Domain
             _turnos.Insert(1, turno);
         }
 
-        public int IdSiguienteTurno()
+        public Turno Proximo()
         {
-            return 1; //Hasta arreglar _turnos
-            return _turnos.FirstOrDefault().Id;
+            return _turnos.FirstOrDefault();
         }
     }
 }

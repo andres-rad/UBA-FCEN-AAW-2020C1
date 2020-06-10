@@ -8,6 +8,7 @@ using Dominio;
 namespace Web.Areas.Propietarios.Controllers
 {
     [Area("Propietarios")]
+    //[Authorize]
     [AllowAnonymous]
     public class CrearTurneroController : Controller
     {

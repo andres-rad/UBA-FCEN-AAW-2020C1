@@ -1,7 +1,9 @@
 ﻿using Aplicacion.Interfaces;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
@@ -20,7 +22,7 @@ namespace Aplicacion.UseCases.Cliente
         public SolicitarTurnoResponse Procesar(SolicitarTurnoRequest request)
         {
 
-            var turnero = _repository.Turneros.Find(request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if(turnero == null)
             {
@@ -30,7 +32,7 @@ namespace Aplicacion.UseCases.Cliente
             var turno = turnero.ExpedirTurno(request.Email);
 
             _repository.SaveChanges();
-
+            
             var response = new SolicitarTurnoResponse
             {
                 Concepto = turnero.Concepto,

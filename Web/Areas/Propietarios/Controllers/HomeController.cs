@@ -9,6 +9,7 @@ using Aplicacion.Interfaces;
 namespace Web.Areas.Propietarios.Controllers
 {
     [Area("Propietarios")]
+    //[Authorize]
     [AllowAnonymous]
     public class HomeController : Controller
     {
