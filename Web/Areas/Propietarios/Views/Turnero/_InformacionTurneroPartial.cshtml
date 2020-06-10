@@ -1,0 +1,59 @@
+﻿@model Web.Areas.Propietarios.Models.InformacionTurneroVM
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="col-sm-12 col-md-6">
+    <div class="row">
+        <div class="col-12">
+            <div class="h1">
+                @Model.Concepto
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="h4">
+                @Model.Ciudad
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="h4">
+                @Model.Direccion
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="h4">
+                Turnos en espera: <span class="badge badge-info">@(Model.CantidadEnEspera)</span>
+            </div>
+        </div>
+        <div class="col-12">
+            <div class="h4">
+                Limite: <span class="badge badge-warning">@(Model.CantidadMaxima == int.MaxValue ? "Sin límite" : Model.CantidadMaxima.ToString())</span>
+            </div>
+        </div>
+        <hr class="w-100" />
+        <div class="col-8 offset-2">
+            <div class="row">
+                <div class="col-12 h4 text-center">
+                    QR para otorgar turnos
+                </div>
+            </div>
+            <div class="col-12">
+                <img class="img-fluid" src="data:image/jpeg;base64, @Model.Qr" alt="Codigo QR" />
+            </div>
+        </div>
+    </div>
+    <div class="col-12">
+        @Html.ActionLink(
+            "Editar",
+            "Index",
+            "EditarTurnero",
+            new
+            {
+                idTurnero = @Model.IdTurnero
+            },
+            new { @class = "btn btn-default btn-primary" }
+         )
+    </div>
+</div>

@@ -54,20 +54,48 @@ namespace Web.Areas.Propietarios.Controllers
 
 
         [HttpGet]
-        public IActionResult Detalle(int idTurnero, [FromServices] DetalleTurneroUC uc)
+        public IActionResult Detalle(int idTurnero, [FromServices] SaltarTurnoUC uc)
         {
-            var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
-            var turnero = uc.Procesar(req);
+            var req = new SaltarTurnoRequest { IdTurnero = idTurnero };
+            var response = uc.Procesar(req);
 
             //TO-DO: Agregar DetalleTurneroVM
 
-            return View(turnero);
+            ViewData["InformacionTurnero"] = new InformacionTurneroVM
+            {
+                IdTurnero = response.Id,
+                CantidadEnEspera = response.CantidadEnEspera,
+                Concepto = response.Concepto,
+                Ciudad = response.Ciudad,
+                Direccion = $"{response.Calle} {response.Numero}",
+                Qr = response.Qr,
+                CantidadMaxima = response.CantidadMaxima,
+                Latitud = response.Latitud,
+                Longitud = response.Longitud
+            };
+
+            return View(response);
         }
 
         public IActionResult CancelarTurno(int idTurno, int idTurnero, [FromServices] CancelarTurnoUC uc)
         {
             //REVISAR EL REQUEST SOBRE CLIENTE UC
             var req = new CancelarTurnoRequest
+            {
+                IdTurnero = idTurnero,
+                IdTurno = idTurno
+            };
+
+            uc.Procesar(req);
+
+            return RedirectToAction(nameof(Detalle), new { idTurnero });
+        }
+
+        [HttpPost]
+        public IActionResult SaltarTurno(int idTurno, int idTurnero, [FromServices] SaltarTurnoUC uc)
+        {
+            //REVISAR EL REQUEST SOBRE CLIENTE UC
+            var req = new SaltarTurnoRequest
             {
                 IdTurnero = idTurnero,
                 IdTurno = idTurno
@@ -88,9 +116,9 @@ namespace Web.Areas.Propietarios.Controllers
 
 
         [HttpGet]
-        public IActionResult Editar(int idTurnero, [FromServices] DetalleTurneroUC uc)
+        public IActionResult Editar(int idTurnero, [FromServices] SaltarTurnoUC uc)
         {
-            var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
+            var req = new SaltarTurnoRequest { IdTurnero = idTurnero };
             var detalleTurnero = uc.Procesar(req);
             var turnero = new EditarTurneroVM(
                 idTurnero,
@@ -130,14 +158,15 @@ namespace Web.Areas.Propietarios.Controllers
             return View();
         }
 
-        public IActionResult  AtenderTurno()
+        public IActionResult AtenderTurno()
         {
             return View();
         }
 
-
-        public IActionResult RechazarTurno()
+        
+        public IActionResult RechazarTurno(int idTurno, int idTurnero)
         {
+
             return View();
         }
     }
