@@ -12,7 +12,7 @@ namespace Infrastructura.Persistance
         {
             var turneros = new Turnero[] { new Turnero(
                     idPropietario: "seedUser",
-                  concepto: "Carniceria La Vaca",
+                  concepto: "* Carniceria La Vaca de SeedUser",
                   ubicacion: new Dominio.LatLon ( lat: -34.61066273180164, lon: -58.41436768925822 ),
                   direccion: new Dominio.Direccion { Calle = "CalleAzul", Ciudad = "CABA", Numero = 122 },
                   cantidaMaxima: 100
@@ -21,7 +21,7 @@ namespace Infrastructura.Persistance
 
                 new Turnero(
                     idPropietario: "seedUser",
-                  concepto: "Merceria Mercedes",
+                  concepto: "* Merceria Mercedes de SeedUser",
                   ubicacion: new Dominio.LatLon ( lat: -34.611510422952044, lon: -58.454536451464705 ),
                   direccion: new Dominio.Direccion { Calle = "CaleRoja", Ciudad = "CABA", Numero = 756 },
                   cantidaMaxima: 100
@@ -29,7 +29,7 @@ namespace Infrastructura.Persistance
 
                 new Turnero(
                     idPropietario: "seedUser",
-                  concepto: "Merceria Juanita",
+                  concepto: "Merceria Juanita de SeedUser",
                   ubicacion: new Dominio.LatLon ( lat: -34.611510422952064, lon: -58.454536451464705 ),
                   direccion: new Dominio.Direccion { Calle = "CalleX", Ciudad = "CABA", Numero = 256 },
                   cantidaMaxima: 2
