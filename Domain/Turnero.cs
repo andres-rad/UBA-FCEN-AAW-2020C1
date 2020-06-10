@@ -88,12 +88,12 @@ namespace Domain
             return _turnos.FirstOrDefault();
         }
 
-        public int CantidadTurnosEnEspera()
+        public int CantidadEnEspera()
         {
             return _turnos.Count;
         }
 
-        public Turno DetalleTurno(int idTurno)
+        public Turno Turno(int idTurno)
         {
             return _turnos.FirstOrDefault(t => t.Id == idTurno);
         }
@@ -104,6 +104,7 @@ namespace Domain
 
             return _turnos.IndexOf(turno);
         }
-        
+
+
     }
 }

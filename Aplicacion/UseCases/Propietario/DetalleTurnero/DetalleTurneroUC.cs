@@ -34,7 +34,7 @@ namespace Aplicacion.UseCases.Propietario
             {
                 Id = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
-                CantidadEnEspera = turnero.CantidadTurnosEnEspera(),
+                CantidadEnEspera = turnero.CantidadEnEspera(),
                 SiguienteTurno_Id = proximoTurno?.Id.ToString(),
                 SiguienteTurno_Numero = proximoTurno?.Numero.ToString(),
                 Concepto = turnero.Concepto,

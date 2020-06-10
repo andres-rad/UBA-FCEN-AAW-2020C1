@@ -14,7 +14,7 @@ namespace Web.Areas.Clientes.Models
         public double Longitud { get; set; }
         public int IdTurno { get; set; }
         public int Numero { get; set; }
-        public int EsperaEstimada { get; set; }
+        public string EsperaEstimadaMsg { get; set; }
         public string Qr { get; set; }
     }
 }

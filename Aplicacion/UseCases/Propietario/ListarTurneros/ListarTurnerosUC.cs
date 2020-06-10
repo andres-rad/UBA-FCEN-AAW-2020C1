@@ -22,6 +22,7 @@ namespace Aplicacion.UseCases.Propietario
             var response = new ListarTurnerosResponse { turneros = turnerosList };
             return response;
         }
+
         static ListarTurnerosDTO TurneroToListarTurneroDTO(Turnero turnero)
         {
             return new ListarTurnerosDTO(turnero);

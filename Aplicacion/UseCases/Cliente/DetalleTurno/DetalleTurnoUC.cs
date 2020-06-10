@@ -27,7 +27,7 @@ namespace Aplicacion.UseCases.Cliente
                 throw new Exception("Turnero inexistente");
             }
 
-            var turno = turnero.DetalleTurno(request.IdTurno);
+            var turno = turnero.Turno(request.IdTurno);
 
             if (turno == null)
             {

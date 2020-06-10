@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <h1>Turnero @Model.Concepto</h1>
-                <h2>@Model.Direccion</h2>
+                <p>@Model.Direccion</p>
 
                 <div id="mapaTurnero" style="height:400px"></div>
             </div>
@@ -20,7 +20,7 @@
                     <h1>Turno @Model.Numero</h1>
                 </div>
                 <div class="row justify-content-center">
-                    <h2>@Model.EsperaEstimada personas antes</h2>
+                    <h2>@Model.EsperaEstimadaMsg</h2>
                 </div>
                 <div class="row justify-content-center">
                     <img class="img-fluid" src="data:image/jpeg;base64, @Model.Qr" alt="Codigo QR" />
@@ -42,6 +42,7 @@
     </div>
 </main>
 
+<script src="https://openlayers.org/api/OpenLayers.js"></script>
 <script>
     var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
     var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
@@ -56,8 +57,8 @@
 
     var markers = new OpenLayers.Layer.Markers("Markers");
     var marker = new OpenLayers.Marker(posTurnero);
-    marker.id = id;
-    marker.icon.imageDiv.title = @Model.Concepto;
+    marker.id = @Model.IdTurnero;
+    marker.icon.imageDiv.title = "@Model.Concepto";
     markers.addMarker(marker);
 
     map.addLayer(mapnik);

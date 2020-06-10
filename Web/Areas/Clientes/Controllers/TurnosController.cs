@@ -50,7 +50,7 @@ namespace Web.Areas.Clientes.Controllers
                 Longitud = response.Longitud,
                 IdTurno = response.IdTurno,
                 Numero = response.NumeroTurno,
-                EsperaEstimada = response.EsperaEstimada,
+                EsperaEstimadaMsg = response.EsperaEstimada > 0 ? $"{response.EsperaEstimada} personas antes" : "Es tu turno!",
                 Qr = response.Qr
             };
 
