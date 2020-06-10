@@ -13,16 +13,6 @@ namespace Aplicacion.UseCases.Cliente
         public string Ciudad { get; set; }
         public string Calle { get; set; }
         public int Numero { get; set; }
-        public LatLon Ubicacion { get; internal set; }
-
-        public ListarTurneroMapaDTO(Turnero turnero)
-        {
-            Id = turnero.Id;
-            Concepto = turnero.Concepto;
-            Ciudad = turnero.Direccion.Ciudad;
-            Calle = turnero.Direccion.Calle;
-            Numero = turnero.Direccion.Numero;
-            Ubicacion = turnero.Ubicacion;
-        }
+        public LatLon Ubicacion { get;  set; }
     }
 }
