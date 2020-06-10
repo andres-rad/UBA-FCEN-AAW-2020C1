@@ -14,7 +14,6 @@ namespace Aplicacion.UseCases.Cliente
             _repository = repo;
         }
 
-
         public ListarTurneroMapaResponse Procesar()
         {
             var turneros = _repository.Turneros.ToList();
@@ -22,9 +21,19 @@ namespace Aplicacion.UseCases.Cliente
             var response = new ListarTurneroMapaResponse { turneros = turnerosList };
             return response;
         }
+
         static ListarTurneroMapaDTO TurneroToListarTurneroDTO(Turnero turnero)
         {
-            return new ListarTurneroMapaDTO(turnero);
+            return new ListarTurneroMapaDTO
+            {
+                Id = turnero.Id,
+                Concepto = turnero.Concepto,
+                Ciudad = turnero.Direccion.Ciudad,
+                Calle = turnero.Direccion.Calle,
+                Numero = turnero.Direccion.Numero,
+                Ubicacion = turnero.Ubicacion
+            };
+        
         }
     }
 }

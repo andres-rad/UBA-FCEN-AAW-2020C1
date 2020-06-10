@@ -1,8 +1,24 @@
 ﻿@using Aplicacion.UseCases.Cliente
+@using Newtonsoft.Json
 @model List<ListarTurneroMapaDTO>
+<style>
+    .hidden {
+        display:none;
+    }
+</style>
 
 <div id="buscarTurneroMap" style="height:400px"></div>
+
+<div id="buscarTurneroDataPanel" class="hidden">
+    <h1><label id="descripcionTurnero"></label><br /></h1>
+    <h3><label id="direccionTurnero"></label></h3>
+    <a href="#" id="confirmarTurneroLink" class="btn btn-primary" role="button">Pedir turno</a>
+</div>
+
+
+
 <script src="https://openlayers.org/api/OpenLayers.js"></script>
+
 <script>
     /////////////////////////////////////////////////////////
     // FACTORIZAR
@@ -20,30 +36,42 @@
     map.setCenter(positionIni, zoom);
     /////////////////////////////////////////////////////////
 
-    function cargar(id, concepto, lat, lon) {
+
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+
+    var buildAddress = (idTurnero) => `@Url.Link("Default", new { Area = "Clientes",  Controller = "SolicitarTurno", Action = "ConfirmarTurno"})/?idTurnero=${idTurnero}`
+    var turneros = @Html.Raw(@JsonConvert.SerializeObject(Model))
+
+
+
+    function cargar(id, concepto, direccion, lat, lon) {
         var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
-        var markers = new OpenLayers.Layer.Markers("Markers");
-        map.addLayer(markers);
 
         var marker = new OpenLayers.Marker(position);
         marker.id = id;
         marker.icon.imageDiv.title = concepto;
 
         marker.events.register("click", marker, function () {
-            $("#buscarTurneroDataPanel").css("visibility", "visible");
-            $("#inputDescripcion")[0].innerText = concepto;
+            console.log(`Click en  turnero ${id}: ${concepto}`)
+            $("#descripcionTurnero").text(concepto);
+            $("#direccionTurnero").text(direccion);
+            $("#idTurnero").val(id);
+
+            
+            $("#confirmarTurneroLink").attr("href", buildAddress(id) );
+
+            $("#buscarTurneroDataPanel").removeClass('hidden');
         });
         markers.addMarker(marker);
+        }
+
+    for (var turnero of turneros) {
+        var direccion = `${turnero.Calle} ${turnero.Numero}${turnero.Ciudad}`;
+        cargar(turnero.Id, turnero.Concepto, direccion, turnero.Ubicacion.Latitud, turnero.Ubicacion.Longitud);
     }
 </script>
-@foreach (var turnero in Model)
+@*@foreach (var turnero in Model)
 {
     <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
-}
-<form asp-action="PedirTurno" method="post" name="pedirTurnoForm">
-    <div id="buscarTurneroDataPanel" style="visibility: hidden;">
-        <h1><label for="conceptoInput" id="inputDescripcion"></label><br /></h1>
-        <h3><label for="conceptoInput" id="inputDireccion">Santa Cruz 1345 - CABA</label></h3>
-        <button type="submit" class="btn btn-primary">PedirTurno</button>
-    </div>
-</form>
+}*@
