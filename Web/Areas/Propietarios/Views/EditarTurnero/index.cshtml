@@ -7,7 +7,7 @@
 }
 <h1>Editar Turnero</h1>
 
-<form asp-action="Editar" method="post" name="editarTurneroForm">
+<form asp-action="Editar" method="post" name="editarTurneroForm" enctype="multipart/form-data">
     <div class="form-group">
         <label for="conceptoInput">Descripción</label>
         <input type="text"
@@ -46,21 +46,28 @@
                    name="numero"
                    asp-for="Numero">
         </div>
-        <div class="form-group col-md-7">
-            <label for="inputNumero">Lat</label>
+    </div>
+    <div id="buscarTurneroMap" style="height:50vh"></div>
+    <div class="form-row">
+        <div class="form-group col-md-4">
             <input type="text"
+                   readonly
+                   placeholder="Latitud"
                    class="form-control"
                    id="inputLatitud"
                    name="latitud"
-                   asp-for="Latitud">
+                   asp-for="Latitud"
+                   required>
         </div>
-        <div class="form-group col-md-8">
-            <label for="inputNumero">Lon</label>
+        <div class="form-group col-md-4">
             <input type="text"
+                   readonly
+                   placeholder="Longitud"
                    class="form-control"
                    id="inputLongitud"
                    name="longitud"
-                   asp-for="Longitud">
+                   asp-for="Longitud"
+                   required>
         </div>
     </div>
     <div class="form-group">
@@ -73,6 +80,11 @@
                name="CantidadMaxima"
                asp-for="CantidadMaxima" />
     </div>
+
+    <div class="form-group">
+        <input type="file" asp-for="files" multiple="multiple" />
+    </div>
+
     <div class="form-group">
         <label for="inputIdTurnero"></label>
         <input type="hidden"
@@ -82,8 +94,10 @@
                name="IdTurnero"
                asp-for="IdTurnero" />
     </div>
+
     <button type="submit" class="btn btn-primary">Submit</button>
-    <div id="buscarTurneroMap" style="height:400px"></div>
+
+
     <script src="https://openlayers.org/api/OpenLayers.js"></script>
     <script>
         /////////////////////////////////////////////////////////
@@ -95,20 +109,50 @@
         var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
         var positionIni = new OpenLayers.LonLat(lonIni, latIni).transform(fromProjection, toProjection);
 
-        map = new OpenLayers.Map("buscarTurneroMap");
-        var mapnik = new OpenLayers.Layer.OSM();
-        map.addLayer(mapnik);
 
+        map = new OpenLayers.Map({
+            div: "buscarTurneroMap",
+            theme: null,
+            projection: new OpenLayers.Projection("EPSG:900913"),
+            numZoomLevels: 18,
+            controls: [
+                new OpenLayers.Control.TouchNavigation({
+                    dragPanOptions: {
+                        enableKinetic: true
+                    }
+                }),
+                new OpenLayers.Control.Zoom()
+            ],
+            layers: [
+                new OpenLayers.Layer.OSM("OpenStreetMap", null, {
+                    transitionEffect: 'resize'
+                }),
+                new OpenLayers.Layer.Markers("Markers")
+            ]
+        });
         map.setCenter(positionIni, zoom);
+
 
         map.events.register('click', map, handleClick);
         map.events.register('touchstart', map, handleClick);
 
-
         function handleClick(e) {
             var lonlat = map.getLonLatFromViewPortPx(e.xy);
+            addMarker(lonlat);
+            lonlat = new OpenLayers.LonLat(lonlat.lon, lonlat.lat).transform(toProjection, fromProjection);
             $("#inputLatitud").val(lonlat.lat);
             $("#inputLongitud").val(lonlat.lon);
+        }
+
+        var size = new OpenLayers.Size(21, 25);
+        var offset = new OpenLayers.Pixel(-(size.w / 2), -size.h);
+        var icon = new OpenLayers.Icon('https://www.flaticon.com/premium-icon/icons/svg/2776/2776000.svg', size, offset);
+
+
+        function addMarker(position) {
+            var markers = map.layers[1]
+            markers.clearMarkers();
+            markers.addMarker(new OpenLayers.Marker(position, icon));
         }
     </script>
 </form>
