@@ -35,7 +35,9 @@ namespace Aplicacion.UseCases.Propietario
                 Calle = turnero.Direccion.Calle,
                 Numero = turnero.Direccion.Numero,
                 Qr = _qrProvider.Encode(turnero.Id.ToString()),
-                CantidadMaxima = turnero.CantidadMaxima
+                CantidadMaxima = turnero.CantidadMaxima,
+                Latitud = turnero.Ubicacion.Latitud,
+                Longitud = turnero.Ubicacion.Longitud
             };
         }
     }
