@@ -27,11 +27,13 @@
                 </div>
                 <div class="row justify-content-center">
                     <form>
-                        <div class="col-sm-6">
-                            <button>Demorar turno</button>
-                        </div>
-                        <div class="col-sm-6">
-                            <button>Cancelar turno</button>
+                        <input name="idTurno" hidden value="@Model.IdTurno" />
+                        <input name="idTurnero" hidden value="@Model.IdTurnero" />
+                        <div class="col-sm-12">
+                            <div class="btn-toolbar justify-content-around align-items-center" role="toolbar" aria-label="Toolbar with button groups">
+                                <button class="btn btn-primary" type="submit" asp-action="Demorar">Demorar turno</button>
+                                <button class="btn btn-danger" type="submit" asp-action="Cancelar">Cancelar turno</button>
+                            </div>
                         </div>
                     </form>
                 </div>
