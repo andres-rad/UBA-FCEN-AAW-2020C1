@@ -59,7 +59,7 @@ namespace Web.Areas.Clientes.Controllers
 
             var response = uc.Procesar(request);
 
-            return RedirectToAction(nameof(TurnosController.Detalle), nameof(TurnosController),  new { idTurnero = response.IdTurnero, idTurno = response.IdTurno });
+            return RedirectToAction("Detalle", "Turnos",  new { idTurnero = response.IdTurnero, idTurno = response.IdTurno });
         }
 
     }

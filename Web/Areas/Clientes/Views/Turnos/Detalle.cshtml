@@ -1,5 +1,65 @@
-﻿@*
+﻿@model Web.Areas.Clientes.Models.DetalleTurnoVM
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
 }
+
+
+<main>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <h1>Turnero @Model.Concepto</h1>
+                <h2>@Model.Direccion</h2>
+
+                <div id="mapaTurnero" style="height:400px"></div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div class="row justify-content-center">
+                    <h1>Turno @Model.Numero</h1>
+                </div>
+                <div class="row justify-content-center">
+                    <h2>@Model.EsperaEstimada personas antes</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <img class="img-fluid" src="data:image/jpeg;base64, @Model.Qr" alt="Codigo QR" />
+                </div>
+                <div class="row justify-content-center">
+                    <form>
+                        <div class="col-sm-6">
+                            <button>Demorar turno</button>
+                        </div>
+                        <div class="col-sm-6">
+                            <button>Cancelar turno</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<script>
+    var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+
+    var zoom = 12;
+    var lat = @Model.Latitud;
+    var lon = @Model.Longitud;
+    var posTurnero = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+
+    var map = new OpenLayers.Map("mapaTurnero");
+    var mapnik = new OpenLayers.Layer.OSM();
+
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    var marker = new OpenLayers.Marker(posTurnero);
+    marker.id = id;
+    marker.icon.imageDiv.title = @Model.Concepto;
+    markers.addMarker(marker);
+
+    map.addLayer(mapnik);
+    map.addLayer(markers);
+    map.setCenter(posTurnero, zoom);
+
+</script>

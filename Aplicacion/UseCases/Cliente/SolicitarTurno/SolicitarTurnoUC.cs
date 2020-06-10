@@ -35,8 +35,10 @@ namespace Aplicacion.UseCases.Cliente
             
             var response = new SolicitarTurnoResponse
             {
-                Concepto = turnero.Concepto,
-                QR = _qrp.Encode(turno.Id.ToString())
+                //Concepto = turnero.Concepto,
+                //QR = _qrp.Encode(turno.Id.ToString())
+                IdTurno = turno.Id,
+                IdTurnero = turnero.Id
             };
 
             return response;

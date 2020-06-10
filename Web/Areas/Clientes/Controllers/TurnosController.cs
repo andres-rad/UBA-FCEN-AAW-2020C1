@@ -28,49 +28,30 @@ namespace Web.Areas.Clientes.Controllers
             _solicitarTurnoUC = solicitarTurnoUC;
         }
 
-        [HttpGet]
-        public IActionResult Nuevo()
-        {
-            return View();
-        }
 
         [HttpGet]
-        public IActionResult SolicitarPorTurnero(int idTurnero)
-        {
-            
-            var request = new SolicitarTurnoRequest
-            {
-                IdTurnero = idTurnero
-            };
-
-            var response = _solicitarTurnoUC.Procesar(request);
-
-            var turnoVM = new TurnoVM
-            {
-                Concepto = response.Concepto,
-                QR = response.QR
-            };
-
-            return View(turnoVM);
-        }
-
-
-        [HttpGet]
-        public IActionResult Detalle(int idTurnero, int idTurno, [FromServices] detalleTurnoUC)
+        public IActionResult Detalle(int idTurnero, int idTurno, [FromServices] DetalleTurnoUC detalleTurnoUC)
         {
 
             var request = new DetalleTurnoRequest
             {
                 IdTurnero = idTurnero,
-                idTurno = idTurno
+                IdTurno = idTurno
             };
 
             var response = detalleTurnoUC.Procesar(request);
 
             var turnoVM = new DetalleTurnoVM
             {
+                IdTurnero = response.IdTurnero,
                 Concepto = response.Concepto,
-                QR = response.QR
+                Direccion = $"{response.Calle} {response.Numero}, {response.Ciudad}",
+                Latitud = response.Latitud,
+                Longitud = response.Longitud,
+                IdTurno = response.IdTurno,
+                Numero = response.NumeroTurno,
+                EsperaEstimada = response.EsperaEstimada,
+                Qr = response.Qr
             };
 
             return View(turnoVM);

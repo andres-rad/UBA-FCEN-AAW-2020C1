@@ -33,6 +33,11 @@ namespace Domain
             UltimoNumero = 0;
         }
 
+        public object DetalleTurno(object idTurno)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
         {
             Concepto = concepto;
@@ -87,5 +92,18 @@ namespace Domain
         {
             return _turnos.Count;
         }
+
+        public Turno DetalleTurno(int idTurno)
+        {
+            return _turnos.FirstOrDefault(t => t.Id == idTurno);
+        }
+
+        public int EsperaParaTurno(int idTurno)
+        {
+            var turno = _turnos.FirstOrDefault(t => t.Id == idTurno);
+
+            return _turnos.IndexOf(turno);
+        }
+        
     }
 }
