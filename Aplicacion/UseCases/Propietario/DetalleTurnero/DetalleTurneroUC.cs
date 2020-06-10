@@ -1,4 +1,5 @@
 ﻿using Aplicacion.Interfaces;
+using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,8 @@ namespace Aplicacion.UseCases.Propietario
             {
                 Id = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
-                IdSiguienteTurno = proximoTurno?.Id.ToString(),
+                CantidadEnEspera = turnero.CantidadTurnosEnEspera(),
+                SiguienteTurno = proximoTurno?.Id.ToString(),
                 Concepto = turnero.Concepto,
                 Ciudad = turnero.Direccion.Ciudad,
                 Calle = turnero.Direccion.Calle,

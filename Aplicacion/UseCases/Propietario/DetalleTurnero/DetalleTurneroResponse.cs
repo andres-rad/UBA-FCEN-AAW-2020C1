@@ -10,8 +10,8 @@ namespace Aplicacion.UseCases.Propietario
     {
         public int Id { get; set; }
         public string IdPropietario { get; set; }
-        public string IdSiguienteTurno { get; set; }
-
+        public string SiguienteTurno { get; set; }
+        public int CantidadEnEspera { get; set; }
         public string Concepto { get; set; }
         public string Ciudad { get; set; }
         public string Calle { get; set; }

@@ -81,5 +81,10 @@ namespace Domain
         {
             return _turnos.FirstOrDefault();
         }
+
+        public int CantidadTurnosEnEspera()
+        {
+            return _turnos.Count;
+        }
     }
 }
