@@ -54,28 +54,33 @@ namespace Web.Areas.Propietarios.Controllers
 
 
         [HttpGet]
-        public IActionResult Detalle(int idTurnero, [FromServices] SaltarTurnoUC uc)
+        public IActionResult Detalle(int idTurnero, [FromServices] DetalleTurneroUC uc)
         {
-            var req = new SaltarTurnoRequest { IdTurnero = idTurnero };
+            var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
             var response = uc.Procesar(req);
 
-            //TO-DO: Agregar DetalleTurneroVM
-
-            ViewData["InformacionTurnero"] = new InformacionTurneroVM
+            var infoTurnero = new InformacionTurneroVM
             {
-                IdTurnero = response.Id,
+                IdTurnero = response.IdTurnero,
                 CantidadEnEspera = response.CantidadEnEspera,
                 Concepto = response.Concepto,
                 Ciudad = response.Ciudad,
                 Direccion = $"{response.Calle} {response.Numero}",
-                Qr = response.Qr,
+                Qr = response.QrTurnero,
                 CantidadMaxima = response.CantidadMaxima,
                 Latitud = response.Latitud,
                 Longitud = response.Longitud
             };
 
-            return View(response);
+            var detalleTurneroVM = new DetalleTurneroVM()
+            {
+                InfoTurnero = infoTurnero,
+                NumeroTurnoEnLlamada = response.NumeroTurnoEnLlamada
+            };
+
+            return View(detalleTurneroVM);
         }
+
 
         public IActionResult CancelarTurno(int idTurno, int idTurnero, [FromServices] CancelarTurnoUC uc)
         {
@@ -92,13 +97,11 @@ namespace Web.Areas.Propietarios.Controllers
         }
 
         [HttpPost]
-        public IActionResult SaltarTurno(int idTurno, int idTurnero, [FromServices] SaltarTurnoUC uc)
+        public IActionResult SaltarTurno(int idTurnero, [FromServices] SaltarTurnoUC uc)
         {
-            //REVISAR EL REQUEST SOBRE CLIENTE UC
             var req = new SaltarTurnoRequest
             {
-                IdTurnero = idTurnero,
-                IdTurno = idTurno
+                IdTurnero = idTurnero
             };
 
             uc.Procesar(req);
@@ -153,21 +156,12 @@ namespace Web.Areas.Propietarios.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ProcesarQrTurno()
-        {
-            return View();
-        }
-
-        public IActionResult AtenderTurno()
-        {
-            return View();
-        }
-
-        
-        public IActionResult RechazarTurno(int idTurno, int idTurnero)
+        [HttpPost]
+        public string AtenderTurno(string qrData)
         {
 
-            return View();
+            return qrData;
         }
+
     }
 }

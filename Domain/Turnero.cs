@@ -33,11 +33,6 @@ namespace Domain
             UltimoNumero = 0;
         }
 
-        public object DetalleTurno(object idTurno)
-        {
-            throw new NotImplementedException();
-        }
-
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
         {
             Concepto = concepto;
@@ -59,15 +54,12 @@ namespace Domain
             return turno;
         }
 
-        public Turno ProximoTurno()
-        {
-            return _turnos.FirstOrDefault();
-        }
-
-        public void Avanzar()
+        public Turno LlamarSiguiente()
         {
             if(_turnos.Count > 0)
                 _turnos.RemoveAt(0);
+
+            return _turnos.FirstOrDefault();
         }
 
         public void Cancelar(int idTurno)
@@ -76,14 +68,26 @@ namespace Domain
             _turnos.Remove(turno);
         }
         
-        public void Demorar()
+        public void Demorar(int idTurno)
         {
-            var turno = ProximoTurno();
-            Avanzar();
-            _turnos.Insert(1, turno);
+            var turnoADemorar = this.Turno(idTurno);
+            
+            if(turnoADemorar == null)
+            {
+                throw new Exception($"Turno inexistente: {idTurno}");
+            }
+
+            var indexTurno = _turnos.IndexOf(turnoADemorar);
+
+            if (indexTurno == _turnos.Count - 1) return;
+
+            var turnoPosterior = _turnos[indexTurno + 1];
+            
+            _turnos[indexTurno] = turnoPosterior;
+            _turnos[indexTurno+1] = turnoADemorar;
         }
 
-        public Turno Proximo()
+        public Turno TurnoEnLlamada()
         {
             return _turnos.FirstOrDefault();
         }

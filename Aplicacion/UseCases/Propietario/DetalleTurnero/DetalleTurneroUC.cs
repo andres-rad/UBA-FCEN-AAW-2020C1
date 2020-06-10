@@ -28,20 +28,19 @@ namespace Aplicacion.UseCases.Propietario
                 throw new Exception("Turnero no encontrado");
             }
 
-            var proximoTurno = turnero.Proximo();
+            var turnoEnLlamada = turnero.TurnoEnLlamada();
 
             return new DetalleTurneroResponse()
             {
-                Id = turnero.Id,
+                IdTurnero = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
                 CantidadEnEspera = turnero.CantidadEnEspera(),
-                SiguienteTurno_Id = proximoTurno?.Id.ToString(),
-                SiguienteTurno_Numero = proximoTurno?.Numero.ToString(),
+                NumeroTurnoEnLlamada = turnoEnLlamada?.Numero,
                 Concepto = turnero.Concepto,
                 Ciudad = turnero.Direccion.Ciudad,
                 Calle = turnero.Direccion.Calle,
                 Numero = turnero.Direccion.Numero,
-                Qr = _qrProvider.Encode(turnero.Id.ToString()),
+                QrTurnero = _qrProvider.Encode(turnero.Id.ToString()),
                 CantidadMaxima = turnero.CantidadMaxima,
                 Latitud = turnero.Ubicacion.Latitud,
                 Longitud = turnero.Ubicacion.Longitud
