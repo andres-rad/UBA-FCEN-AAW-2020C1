@@ -41,7 +41,15 @@ namespace Infrastructura.Persistance
                   ubicacion: new Dominio.LatLon (lat:-34.604446065572695, lon :-58.40338136113314 ),
                   direccion: new Dominio.Direccion { Calle = "Arboles", Ciudad = "CABA", Numero = 1563 },
                   cantidaMaxima: int.MaxValue
-                 )
+                 ),
+
+                new Turnero(
+                    idPropietario: "seedUser",
+                  concepto: "El Vacio de SeedUser",
+                  ubicacion: new Dominio.LatLon ( lat: -34.611510422952264, lon: -58.454536451464705 ),
+                  direccion: new Dominio.Direccion { Calle = "CalleSinNombre", Ciudad = "CABA", Numero = 0 },
+                  cantidaMaxima: 2
+                  )
             };
 
             context.Turneros.AddRange(turneros);

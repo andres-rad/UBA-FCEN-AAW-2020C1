@@ -54,5 +54,27 @@ namespace Web.Areas.Clientes.Controllers
             return View(turnoVM);
         }
 
+
+        [HttpGet]
+        public IActionResult Detalle(int idTurnero, int idTurno, [FromServices] detalleTurnoUC)
+        {
+
+            var request = new DetalleTurnoRequest
+            {
+                IdTurnero = idTurnero,
+                idTurno = idTurno
+            };
+
+            var response = detalleTurnoUC.Procesar(request);
+
+            var turnoVM = new DetalleTurnoVM
+            {
+                Concepto = response.Concepto,
+                QR = response.QR
+            };
+
+            return View(turnoVM);
+        }
+
     }
 }

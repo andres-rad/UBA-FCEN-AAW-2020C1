@@ -6,7 +6,7 @@ namespace Aplicacion.UseCases.Cliente
 {
     public class SolicitarTurnoResponse
     {
-        public string Concepto { get; set; }
-        public string QR { get; set; }
+        public int IdTurnero { get; set; }
+        public int IdTurno  { get; set; }
     }
 }

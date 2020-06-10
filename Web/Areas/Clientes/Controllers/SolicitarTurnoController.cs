@@ -59,13 +59,7 @@ namespace Web.Areas.Clientes.Controllers
 
             var response = uc.Procesar(request);
 
-            var turnoVM = new TurnoVM
-            {
-                Concepto = response.Concepto,
-                QR = response.QR
-            };
-
-            return View(turnoVM);
+            return RedirectToAction(nameof(TurnosController.Detalle), nameof(TurnosController),  new { idTurnero = response.IdTurnero, idTurno = response.IdTurno });
         }
 
     }
