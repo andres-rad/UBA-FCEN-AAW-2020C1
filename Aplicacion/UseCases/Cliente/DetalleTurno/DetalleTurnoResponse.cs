@@ -12,6 +12,6 @@
         public int IdTurno { get; set; }
         public int NumeroTurno { get; set; }
         public int EsperaEstimada { get; set; }
-       public string Qr { get; set; }
+       public string QrTurno { get; set; }
     }
 }

@@ -44,7 +44,7 @@ namespace Aplicacion.UseCases.Cliente
                 Numero = turnero.Direccion.Numero,
                 Latitud = turnero.Ubicacion.Latitud,
                 Longitud = turnero.Ubicacion.Longitud,
-                Qr = _qrProvider.Encode(turnero.Id.ToString()),
+                QrTurno = _qrProvider.Encode(turno.Id.ToString()),
                 EsperaEstimada = turnero.EsperaParaTurno(turno.Id)
             };
         }
