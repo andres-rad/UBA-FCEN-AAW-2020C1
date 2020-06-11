@@ -26,6 +26,7 @@
                         </h1>
                         <form id="qr_form" asp-action="AtenderTurno">
                             <div id="reader"></div>
+                            <input type="text" name="idTurnero" value="@Model.InfoTurnero.IdTurnero" hidden />
                             <input class="text-center" type="text" id="qrdata" name="qrData" hidden />
                         </form>
                         <form asp-action="SaltarTurno">
