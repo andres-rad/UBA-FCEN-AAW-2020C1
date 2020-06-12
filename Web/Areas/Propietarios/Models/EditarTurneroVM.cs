@@ -3,6 +3,7 @@ using Dominio;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,11 +21,10 @@ namespace Web.Areas.Propietarios.Models
         public double Latitud { get; set; }
         public double Longitud { get; set; }
 
-        public IFormFile[] files { get; set; }
+        public IFormFile[] Imagenes { get; set; }
 
         public EditarTurneroVM() { }
-        public EditarTurneroVM(int id, string concepto, string ciudad, string calle, int numero, double latitud, double longitud, int cantidad=9)
-        {
+        public EditarTurneroVM(int id, string concepto, string ciudad, string calle, int numero, double latitud, double longitud, IFormFile[] imagenes, int cantidad=9)        {
             IdTurnero = id;
             Concepto = concepto;
             Ciudad = ciudad;
@@ -33,6 +33,7 @@ namespace Web.Areas.Propietarios.Models
             CantidadMaxima = cantidad;
             Latitud = latitud;
             Longitud = longitud;
+            Imagenes = imagenes;
         }
     }
 }

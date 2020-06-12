@@ -128,6 +128,7 @@ namespace Web.Areas.Propietarios.Controllers
                 detalleTurnero.Numero,
                 detalleTurnero.Latitud,
                 detalleTurnero.Longitud,
+                null,
                 detalleTurnero.CantidadMaxima);
 
             return View(turnero);
