@@ -5,3 +5,5 @@ Area controllers are designated with the [Area] attribute (it's not enough to st
 Librerias usadas:
 https://github.com/codebude/QRCoder/wiki
 https://blog.minhazav.dev/HTML5-QR-Code-scanning-launched-v1.0.1/
+
+TODO: manejra el caso en que trato de sacar turnos en una fila que llego a su tope

@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Clientes\Data\" />
-    <Folder Include="Areas\Propietarios\Data\" />
   </ItemGroup>
 
   <ItemGroup>

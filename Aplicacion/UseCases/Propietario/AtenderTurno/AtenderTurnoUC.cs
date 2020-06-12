@@ -1,36 +1,53 @@
 ﻿using Aplicacion.Interfaces;
-using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class DetalleTurneroUC : IUseCase
+    public class AtenderTurnoUC :IUseCase
     {
         private readonly IRepository _repository;
         private readonly IQRProvider _qrProvider;
 
-        public DetalleTurneroUC(IRepository repo, IQRProvider qrProvider)
+        public AtenderTurnoUC(IRepository repository, IQRProvider qrProvider)
         {
-            _repository = repo;
             _qrProvider = qrProvider;
+            _repository = repository;
         }
 
-        public DetalleTurneroResponse Procesar(DetalleTurneroRequest req)
+        public AtenderTurnoResponse Procesar(AtenderTurnoRequest request)
         {
-            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
-
-            if(turnero == null)
+            int idturnoEnQr;
+            try
             {
-                throw new Exception("Turnero no encontrado");
+                idturnoEnQr = int.Parse(request.QrData);
+            }
+            catch
+            {
+                throw new Exception("Qr invalido");
+            }
+
+            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
+
+            if (turnero == null)
+            {
+                throw new Exception("Turnero inexistente");
+            }
+
+            var turnoEnQr = turnero.Turno(idturnoEnQr);
+
+            if(turnoEnQr == null) 
+            {
+                throw new Exception("Qr invalido: no contiene data de un turnero");
             }
 
             var turnoEnLlamada = turnero.TurnoEnLlamada();
 
-            return new DetalleTurneroResponse()
+            return new AtenderTurnoResponse
             {
                 IdTurnero = turnero.Id,
                 IdPropietario = turnero.IdPropietario,
@@ -43,7 +60,8 @@ namespace Aplicacion.UseCases.Propietario
                 QrTurnero = _qrProvider.Encode(turnero.Id.ToString()),
                 CantidadMaxima = turnero.CantidadMaxima,
                 Latitud = turnero.Ubicacion.Latitud,
-                Longitud = turnero.Ubicacion.Longitud
+                Longitud = turnero.Ubicacion.Longitud,
+                NumeroTurnoEnQr = turnoEnQr.Numero
             };
         }
     }
