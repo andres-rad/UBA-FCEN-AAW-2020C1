@@ -25,7 +25,7 @@
                             Atendiendo al turno @Model.NumeroEnLlamada
                         </h1>
 
-                        <form asp-action="LlamarSiguiente">
+                        <form asp-action="ConcluirAtencion">
                             <input type="text" name="idTurnero" value="@Model.InfoTurnero.IdTurnero" hidden />
                             <button class="btn btn-primary" type="submit">Llamar siguiente</button>
                         </form>

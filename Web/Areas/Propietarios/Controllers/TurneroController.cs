@@ -188,11 +188,11 @@ namespace Web.Areas.Propietarios.Controllers
 
 
         [HttpPost]
-        public IActionResult LlamarSiguiente(int idTurnero)
+        public IActionResult ConcluirAtencion(int idTurnero, [FromServices] ConcluirAtencionUC uc)
         {
-            //UC: llamasr siguiente
+            var request = new ConcluirAtencionRequest { IdTurnero = idTurnero };
 
-
+            uc.Procesar(request);
 
             return RedirectToAction("Detalle", "Turnero", new { idTurnero = idTurnero });
         }
