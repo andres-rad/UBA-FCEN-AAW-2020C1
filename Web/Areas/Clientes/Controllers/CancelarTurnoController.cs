@@ -17,17 +17,17 @@ namespace Web.Areas.Clientes.Controllers
     {
 
         [HttpPost]
-        public IActionResult CancelarTurno(int idTurnero, string email, [FromServices] CancelarTurnoUC uc)
+        public IActionResult CancelarTurno(int idTurnero, int idTurno, string email, [FromServices] CancelarTurnoUC uc)
         {
             var request = new CancelarTurnoRequest
             {
-                IdTurnero = idTurnero
+                IdTurnero = idTurnero,
+                IdTurno = idTurno
             };
 
             var response = uc.Procesar(request);
 
-            return View();
+            return RedirectToAction("Index", "Home"); 
         }
-
     }
 }
