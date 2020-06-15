@@ -38,7 +38,8 @@ namespace Aplicacion.UseCases.Cliente
                 Latitud = turnero.Ubicacion.Latitud,
                 Longitud = turnero.Ubicacion.Longitud,
                 Qr = _qrProvider.Encode(turnero.Id.ToString()),
-                CantidadMaxima = turnero.CantidadMaxima
+                CantidadMaxima = turnero.CantidadMaxima,
+                CantidadEnEspera = turnero.CantidadEnEspera(),
             };
         }
     }
