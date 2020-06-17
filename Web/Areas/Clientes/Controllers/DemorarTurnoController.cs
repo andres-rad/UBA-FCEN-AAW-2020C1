@@ -27,7 +27,7 @@ namespace Web.Areas.Clientes.Controllers
 
             var response = uc.Procesar(request);
 
-            return RedirectToAction("Index", "Home"); 
+            return RedirectToAction("Detalle", "Turnos", new { idTurnero = idTurnero, idTurno = idTurno });
         }
     }
 }

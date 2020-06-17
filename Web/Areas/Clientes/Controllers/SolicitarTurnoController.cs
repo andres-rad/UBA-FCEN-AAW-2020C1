@@ -22,8 +22,9 @@ namespace Web.Areas.Clientes.Controllers
         public IActionResult Mapa([FromServices] ListarEnMapaUC uc)
         {
             var response = uc.Procesar();
+            var turnerosList = response.turneros.ConvertAll(new Converter<ListarTurneroMapaDTO, ListarTurnerosVM>(ListarTurneroMapaDTOToListarTurnerosVM));
 
-            return View(response.turneros);
+            return View(turnerosList);
         }
         
         [HttpGet]
@@ -44,7 +45,7 @@ namespace Web.Areas.Clientes.Controllers
         {
             var req = new DetalleTurneroClienteRequest { IdTurnero = idTurnero };
             var turneroData = uc.Procesar(req);
-            return View(turneroData);
+            return View(new ConfirmarTurnoVM(turneroData));
         }
 
 
@@ -62,5 +63,9 @@ namespace Web.Areas.Clientes.Controllers
             return RedirectToAction("Detalle", "Turnos",  new { idTurnero = response.IdTurnero, idTurno = response.IdTurno });
         }
 
+        public static ListarTurnerosVM ListarTurneroMapaDTOToListarTurnerosVM(ListarTurneroMapaDTO turnero)
+        {
+            return new ListarTurnerosVM(turnero);
+        }
     }
 }

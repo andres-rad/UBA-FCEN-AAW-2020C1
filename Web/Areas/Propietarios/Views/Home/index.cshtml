@@ -18,12 +18,12 @@
             }
             else
             {
-                <table class="table table-hover table-striped " style="width:100%">
+                <table class="table table-responsive table-striped " style="width:100%">
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
                             <th scope="col">Direccion</th>
-                            <th scope="col" class="text-center">Cantida de gente en espera</th>
+                            <th scope="col" class="text-center">Gente en espera</th>
                             <th scope="col" colspan="2"></th>
                         </tr>
                     </thead>
@@ -45,8 +45,6 @@
                                         },
                                         null
                                     )
-                                </td>
-                                <td>
                                     @Html.ActionLink(
                                         "Editar",
                                         "Editar",

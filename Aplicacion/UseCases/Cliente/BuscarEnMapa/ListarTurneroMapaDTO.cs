@@ -14,5 +14,7 @@ namespace Aplicacion.UseCases.Cliente
         public string Calle { get; set; }
         public int Numero { get; set; }
         public LatLon Ubicacion { get;  set; }
+        public int CantidadMaxima { get; set; }
+        public int CantidadEnEspera { get; set; }
     }
 }

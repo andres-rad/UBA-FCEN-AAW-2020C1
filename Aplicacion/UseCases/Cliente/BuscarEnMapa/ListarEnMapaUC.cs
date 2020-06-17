@@ -2,6 +2,7 @@
 using System.Linq;
 using Aplicacion.Interfaces;
 using Domain;
+using Microsoft.EntityFrameworkCore;
 
 namespace Aplicacion.UseCases.Cliente
 {
@@ -16,7 +17,7 @@ namespace Aplicacion.UseCases.Cliente
 
         public ListarTurneroMapaResponse Procesar()
         {
-            var turneros = _repository.Turneros.ToList();
+            var turneros = _repository.Turneros.Include(t => t._turnos).ToList();
             var turnerosList = turneros.ConvertAll(new Converter<Turnero, ListarTurneroMapaDTO>(TurneroToListarTurneroDTO));
             var response = new ListarTurneroMapaResponse { turneros = turnerosList };
             return response;
@@ -31,9 +32,10 @@ namespace Aplicacion.UseCases.Cliente
                 Ciudad = turnero.Direccion.Ciudad,
                 Calle = turnero.Direccion.Calle,
                 Numero = turnero.Direccion.Numero,
-                Ubicacion = turnero.Ubicacion
+                Ubicacion = turnero.Ubicacion,
+                CantidadMaxima = turnero.CantidadMaxima,
+                CantidadEnEspera = turnero.CantidadEnEspera(),
             };
-        
         }
     }
 }

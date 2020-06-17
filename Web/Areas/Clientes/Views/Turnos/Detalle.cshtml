@@ -5,7 +5,6 @@
 @{
 }
 
-
 <main>
     <div class="container-fluid">
         <div class="row">
@@ -13,7 +12,7 @@
                 <h1>Turnero @Model.Concepto</h1>
                 <p>@Model.Direccion</p>
 
-                <div id="mapaTurnero" style="height:400px"></div>
+                <div id="mapaTurnero" style="height:20vh"></div>
             </div>
             <div class="col-sm-12 col-md-6">
                 <div class="row justify-content-center">
@@ -44,25 +43,6 @@
 
 <script src="https://openlayers.org/api/OpenLayers.js"></script>
 <script>
-    var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
-    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
-
-    var zoom = 12;
-    var lat = @Model.Latitud;
-    var lon = @Model.Longitud;
-    var posTurnero = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
-
-    var map = new OpenLayers.Map("mapaTurnero");
-    var mapnik = new OpenLayers.Layer.OSM();
-
-    var markers = new OpenLayers.Layer.Markers("Markers");
-    var marker = new OpenLayers.Marker(posTurnero);
-    marker.id = @Model.IdTurnero;
-    marker.icon.imageDiv.title = "@Model.Concepto";
-    markers.addMarker(marker);
-
-    map.addLayer(mapnik);
-    map.addLayer(markers);
-    map.setCenter(posTurnero, zoom);
-
+    var Model = @Html.Raw(Json.Serialize(Model));
 </script>
+<script src="@Url.Content("~/Scripts/turneroInMap.js")" type="text/javascript"></script>

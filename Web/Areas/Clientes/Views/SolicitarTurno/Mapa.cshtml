@@ -1,19 +1,63 @@
-﻿@using Aplicacion.UseCases.Cliente
-@using Newtonsoft.Json
-@model List<ListarTurneroMapaDTO>
+﻿@using Newtonsoft.Json
+@using Web.Areas.Clientes.Models
+@model List<ListarTurnerosVM>
+
 <style>
     .hidden {
-        display:none;
+        display: none;
     }
 </style>
 
-<div id="buscarTurneroMap" style="height:400px"></div>
-
-<div id="buscarTurneroDataPanel" class="hidden">
-    <h1><label id="descripcionTurnero"></label><br /></h1>
-    <h3><label id="direccionTurnero"></label></h3>
-    <a href="#" id="confirmarTurneroLink" class="btn btn-primary" role="button">Pedir turno</a>
+<div class="row">
+    <div class="col-md-8 col-sm-12">
+        <div id="buscarTurneroMap" style="height:50vh; margin: 1px"></div>
+    </div>
+    <div class="col-md-4 col-sm-12">
+        <div id="buscarTurneroDataPanel" class="jumbotron d-flex flex-column" style="display:none!important; height: 50vh; margin: 1px">
+            <div class="h4 text-center" id="descripcionTurnero"></div>
+            <div class="h6 text-center" id="direccionTurnero"></div>
+            <div class="h6 text-center" id="esperaTurnero"></div>
+            <a href="#" id="confirmarTurneroLink" class="btn btn-primary btn-block mt-auto" role="button">Pedir turno</a>
+        </div>
+        <div id="buscarTurneroDataPanelPlaceholder" class="jumbotron" style="height: 50vh; margin: 1px">
+            <div class="h2 text-center">
+                Elegí el local que buscás en el mapa o del listado!
+            </div>
+        </div>
+    </div>
+    <div class="col-12 table-responsive">
+        <table class="table table-striped table-hover table-sm" style="width:100%">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col" class="text-center">Gente en espera</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var turnero in Model)
+                {
+                    <tr>
+                        <td> @turnero.Concepto </td>
+                        <td> @turnero.Calle @turnero.Numero, @turnero.Ciudad</td>
+                        <td class="text-center"> @turnero.DisplayEspera </td>
+                        <td>
+                            @Html.ActionLink(
+                                "Pedir turno",
+                                "ConfirmarTurno",
+                                "SolicitarTurno",
+                                new { idTurnero = turnero.Id },
+                                null
+                            )
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
 
 
 
@@ -45,7 +89,7 @@
 
 
 
-    function cargar(id, concepto, direccion, lat, lon) {
+    function cargar(id, concepto, direccion, lat, lon, displayEspera) {
         var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
 
         var marker = new OpenLayers.Marker(position);
@@ -56,22 +100,24 @@
             console.log(`Click en  turnero ${id}: ${concepto}`)
             $("#descripcionTurnero").text(concepto);
             $("#direccionTurnero").text(direccion);
+            $("#esperaTurnero").text(`Gente en espera: ${displayEspera}`);
             $("#idTurnero").val(id);
 
-            
+
             $("#confirmarTurneroLink").attr("href", buildAddress(id) );
 
-            $("#buscarTurneroDataPanel").removeClass('hidden');
+            $("#buscarTurneroDataPanel").show();
+            $("#buscarTurneroDataPanelPlaceholder").hide();
         });
         markers.addMarker(marker);
         }
 
     for (var turnero of turneros) {
-        var direccion = `${turnero.Calle} ${turnero.Numero}${turnero.Ciudad}`;
-        cargar(turnero.Id, turnero.Concepto, direccion, turnero.Ubicacion.Latitud, turnero.Ubicacion.Longitud);
+        var direccion = `${turnero.Calle} ${turnero.Numero} ${turnero.Ciudad}`;
+        cargar(turnero.Id, turnero.Concepto, direccion, turnero.Ubicacion.Latitud, turnero.Ubicacion.Longitud, turnero.DisplayEspera);
     }
 </script>
 @*@foreach (var turnero in Model)
-{
-    <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
-}*@
+    {
+        <script> cargar(@turnero.Id, "@turnero.Concepto", parseFloat("@turnero.Ubicacion.Latitud".replace(',', '.')), parseFloat("@turnero.Ubicacion.Longitud".replace(',', '.')))</script>
+    }*@
