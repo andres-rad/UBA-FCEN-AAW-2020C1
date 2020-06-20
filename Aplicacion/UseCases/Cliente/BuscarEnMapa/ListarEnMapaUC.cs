@@ -17,7 +17,7 @@ namespace Aplicacion.UseCases.Cliente
 
         public ListarTurneroMapaResponse Procesar()
         {
-            var turneros = _repository.Turneros.Include(t => t._turnos).ToList();
+            var turneros = _repository.Turneros.Include(t => t.Turnos).ToList();
             var turnerosList = turneros.ConvertAll(new Converter<Turnero, ListarTurneroMapaDTO>(TurneroToListarTurneroDTO));
             var response = new ListarTurneroMapaResponse { turneros = turnerosList };
             return response;

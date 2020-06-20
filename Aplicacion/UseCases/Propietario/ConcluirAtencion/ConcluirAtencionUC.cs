@@ -18,7 +18,7 @@ namespace Aplicacion.UseCases.Propietario
 
         public ConcluirAtencionResponse Procesar(ConcluirAtencionRequest req)
         {
-            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
 
             turnero.LlamarSiguiente();
 

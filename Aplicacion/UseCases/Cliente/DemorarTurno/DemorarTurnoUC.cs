@@ -19,8 +19,9 @@ namespace Aplicacion.UseCases.Cliente
         public DemorarTurnoResponse Procesar(DemorarTurnoRequest req)
         {
             //var turnero = _repository.Turneros.Find(req.IdTurnero);
-            var turnero = _repository.Turneros.Include(t => t._turnos).Single(turnero => turnero.Id == req.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).Single(turnero => turnero.Id == req.IdTurnero);
             turnero.Demorar(req.IdTurno);
+            _repository.SaveChanges();
             return new DemorarTurnoResponse { };
         }
     }

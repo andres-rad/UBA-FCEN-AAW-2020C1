@@ -17,7 +17,9 @@ namespace Domain
 
         public int UltimoNumero { get; internal set; }
 
-        public  List<Turno> _turnos {  get;  internal set; } 
+        private List<Turno> _turnos = new List<Turno>();
+        
+        public List<Turno> Turnos { get { _turnos.Sort((p, q) => p.Numero.CompareTo(q.Numero)); return _turnos; } set { _turnos = value; } }
 
         private Turnero() {
         }
@@ -28,7 +30,6 @@ namespace Domain
             Concepto = concepto;
             Direccion = direccion;
             Ubicacion = ubicacion;
-            _turnos = new List<Turno>();
             CantidadMaxima = cantidaMaxima;
             UltimoNumero = 0;
         }
@@ -43,29 +44,29 @@ namespace Domain
 
         public Turno ExpedirTurno(string email)
         {
-            if (_turnos.Count == CantidadMaxima) 
+            if (Turnos.Count == CantidadMaxima) 
                 throw new Exception("Cantidad maxima alcanzada, no se puede expedir turnos por el momento");
             
             UltimoNumero++;
 
             var turno = new Turno(Id, UltimoNumero, email);
-            _turnos.Add(turno);
+            Turnos.Add(turno);
 
             return turno;
         }
 
         public Turno LlamarSiguiente()
         {
-            if(_turnos.Count > 0)
-                _turnos.RemoveAt(0);
+            if(Turnos.Count > 0)
+                Turnos.RemoveAt(0);
 
-            return _turnos.FirstOrDefault();
+            return Turnos.FirstOrDefault();
         }
 
         public void Cancelar(int idTurno)
         {
-            var turno = _turnos.Find(turno => turno.Id == idTurno);
-            _turnos.Remove(turno);
+            var turno = Turnos.Find(turno => turno.Id == idTurno);
+            Turnos.Remove(turno);
         }
         
         public void Demorar(int idTurno)
@@ -77,36 +78,38 @@ namespace Domain
                 throw new Exception($"Turno inexistente: {idTurno}");
             }
 
-            var indexTurno = _turnos.IndexOf(turnoADemorar);
+            var indexTurno = Turnos.IndexOf(turnoADemorar);
 
-            if (indexTurno == _turnos.Count - 1) return;
+            if (indexTurno == Turnos.Count - 1) return;
 
-            var turnoPosterior = _turnos[indexTurno + 1];
-            
-            _turnos[indexTurno] = turnoPosterior;
-            _turnos[indexTurno+1] = turnoADemorar;
+            var turnoPosterior = Turnos[indexTurno + 1];
+            var newOrder = turnoPosterior.Numero;
+            turnoPosterior.Numero = turnoADemorar.Numero;
+            turnoADemorar.Numero = newOrder;
+            Turnos[indexTurno] = turnoPosterior;
+            Turnos[indexTurno+1] = turnoADemorar;
         }
 
         public Turno TurnoEnLlamada()
         {
-            return _turnos.FirstOrDefault();
+            return Turnos.FirstOrDefault();
         }
 
         public int CantidadEnEspera()
         {
-            return _turnos.Count;
+            return Turnos.Count;
         }
 
         public Turno Turno(int idTurno)
         {
-            return _turnos.FirstOrDefault(t => t.Id == idTurno);
+            return Turnos.FirstOrDefault(t => t.Id == idTurno);
         }
 
         public int EsperaParaTurno(int idTurno)
         {
-            var turno = _turnos.FirstOrDefault(t => t.Id == idTurno);
+            var turno = Turnos.FirstOrDefault(t => t.Id == idTurno);
 
-            return _turnos.IndexOf(turno);
+            return Turnos.IndexOf(turno);
         }
 
 

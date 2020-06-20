@@ -18,7 +18,7 @@ namespace Aplicacion.UseCases.Cliente
 
         public CancelarTurnoResponse Procesar(CancelarTurnoRequest request)
         {
-            var turnero = _repository.Turneros.Include(t=> t._turnos).Single(turnero => turnero.Id == request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t=> t.Turnos).Single(turnero => turnero.Id == request.IdTurnero);
 
             turnero.Cancelar(request.IdTurno);
 

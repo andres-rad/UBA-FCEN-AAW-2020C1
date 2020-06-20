@@ -20,7 +20,7 @@ namespace Aplicacion.UseCases.Cliente
 
         public DetalleTurnoResponse Procesar(DetalleTurnoRequest request)
         {
-            var turnero = _repository.Turneros.Include(t => t._turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if(turnero == null)
             {
