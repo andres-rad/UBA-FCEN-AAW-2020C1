@@ -43,7 +43,7 @@ namespace Web.Areas.Propietarios.Controllers
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,
                 Concepto = turnero.Concepto,
-                Ubicacion = new LatLon(double.Parse(turnero.Latitud), double.Parse(turnero.Longitud)),
+                Ubicacion = new LatLon(double.Parse(turnero.Latitud.Replace('.',',')), double.Parse(turnero.Longitud.Replace('.', ','))),
                 CantidadMaxima = turnero.CantidadMaxima
             };
 
