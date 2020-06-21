@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Aplicacion.Interfaces;
@@ -7,6 +8,7 @@ using Aplicacion.UseCases.Cliente;
 using Aplicacion.UseCases.Propietario;
 using Dominio;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Web.Areas.Propietarios.Models;
 
@@ -49,9 +51,10 @@ namespace Web.Areas.Propietarios.Controllers
 
             uc.Procesar(req);
 
+            Common.Utils.PersistFiles(turnero.files);
+
             return RedirectToAction("Index", "Home");
         }
-
 
         [HttpGet]
         public IActionResult Detalle(int idTurnero, [FromServices] DetalleTurneroUC uc)
