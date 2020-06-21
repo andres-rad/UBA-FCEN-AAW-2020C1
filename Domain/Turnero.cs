@@ -54,7 +54,7 @@ namespace Domain
             
             UltimoNumero++;
 
-            var turno = new Turno(Id, UltimoNumero, email);
+            var turno = new Turno(Id, UltimoNumero, email, UltimoNumero);
             Turnos.Add(turno);
 
             return turno;
@@ -63,9 +63,11 @@ namespace Domain
         public Turno LlamarSiguiente()
         {
             if(Turnos.Count > 0)
-                Turnos.RemoveAt(0);
+            {
+                Turnos.Remove(this.TurnoEnLlamada());
+            }
 
-            return Turnos.FirstOrDefault();
+            return this.TurnoEnLlamada();
         }
 
         public void Cancelar(int idTurno)
@@ -83,21 +85,17 @@ namespace Domain
                 throw new Exception($"Turno inexistente: {idTurno}");
             }
 
-            var indexTurno = Turnos.IndexOf(turnoADemorar);
+            var sigTurnoActual = this.Turnos.Where(t => t.Orden > turnoADemorar.Orden).FirstOrDefault();
 
-            if (indexTurno == Turnos.Count - 1) return;
-
-            var turnoPosterior = Turnos[indexTurno + 1];
-            var newOrder = turnoPosterior.Numero;
-            turnoPosterior.Numero = turnoADemorar.Numero;
-            turnoADemorar.Numero = newOrder;
-            Turnos[indexTurno] = turnoPosterior;
-            Turnos[indexTurno+1] = turnoADemorar;
+            if(sigTurnoActual != null)
+            {
+                (turnoADemorar.Orden, sigTurnoActual.Orden ) = (sigTurnoActual.Orden , turnoADemorar.Orden);
+            }
         }
 
         public Turno TurnoEnLlamada()
         {
-            return Turnos.FirstOrDefault();
+            return Turnos.OrderBy(t => t.Orden).FirstOrDefault();
         }
 
         public int CantidadEnEspera()
@@ -112,9 +110,9 @@ namespace Domain
 
         public int EsperaParaTurno(int idTurno)
         {
-            var turno = Turnos.FirstOrDefault(t => t.Id == idTurno);
+            var turno = this.Turno(idTurno);
 
-            return Turnos.IndexOf(turno);
+            return Turnos.Where(t=> t.Orden < turno.Orden).Count();
         }
 
 

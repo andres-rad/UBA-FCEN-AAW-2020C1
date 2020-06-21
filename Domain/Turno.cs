@@ -10,12 +10,14 @@ namespace Domain
         public int TurneroId { get; internal set; }
         public int Numero { get; internal set; }
         public string Email { get; internal set; }
+        public int Orden { get; set; }
 
-        public Turno(int turneroId, int numero, string email)
+        public Turno(int turneroId, int numero, string email, int orden)
         {
             TurneroId = turneroId;
             Numero = numero;
             Email = email;
+            Orden = orden;
         }
     }
 }
