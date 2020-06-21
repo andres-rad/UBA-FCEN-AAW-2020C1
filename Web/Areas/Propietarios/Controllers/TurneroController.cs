@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Aplicacion.Interfaces;
 using Aplicacion.UseCases.Cliente;
 using Aplicacion.UseCases.Propietario;
+using Domain;
 using Dominio;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +39,8 @@ namespace Web.Areas.Propietarios.Controllers
         [HttpPost]
         public IActionResult Crear(CrearTurneroVM turnero, [FromServices] CrearTurneroUC uc)
         {
+            List<FilePath> filePaths = Common.Utils.PersistFiles(turnero.files, AppDomain.CurrentDomain.BaseDirectory);
+
             var req = new CrearTurneroRequest
             {
                 IdPropietario = _userService.UserId,
@@ -46,14 +49,21 @@ namespace Web.Areas.Propietarios.Controllers
                 Numero = turnero.Numero,
                 Concepto = turnero.Concepto,
                 Ubicacion = new LatLon(double.Parse(turnero.Latitud.Replace('.',',')), double.Parse(turnero.Longitud.Replace('.', ','))),
-                CantidadMaxima = turnero.CantidadMaxima
+                CantidadMaxima = turnero.CantidadMaxima,
+                Files = filePaths
             };
 
             uc.Procesar(req);
 
-            Common.Utils.PersistFiles(turnero.files);
-
             return RedirectToAction("Index", "Home");
+        }
+
+
+        
+        private FileStreamResult GetFile(string path)
+        {
+            var image = System.IO.File.OpenRead(path);
+            return File(image, "image/jpeg");
         }
 
         [HttpGet]
@@ -61,6 +71,9 @@ namespace Web.Areas.Propietarios.Controllers
         {
             var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
             var response = uc.Procesar(req);
+
+            List<String> filespaths = new List<string>();
+            foreach (FilePath f in response.Files) filespaths.Add(f.Path);
 
             var infoTurnero = new InformacionTurneroVM
             {
@@ -72,7 +85,8 @@ namespace Web.Areas.Propietarios.Controllers
                 Qr = response.QrTurnero,
                 CantidadMaxima = response.CantidadMaxima,
                 Latitud = response.Latitud,
-                Longitud = response.Longitud
+                Longitud = response.Longitud,
+                Files = filespaths
             };
 
             var detalleTurneroVM = new DetalleTurneroVM()

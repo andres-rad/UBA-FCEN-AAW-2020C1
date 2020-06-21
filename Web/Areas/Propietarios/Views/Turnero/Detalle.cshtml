@@ -2,8 +2,6 @@
 @model Web.Areas.Propietarios.Models.DetalleTurneroVM
 @{
     ViewData["Area"] = "Propietarios";
-
-    
 }
 <main>
     <div class="container-fluid">
@@ -28,7 +26,7 @@
                             <div id="reader"></div>
                             <input type="text" name="idTurnero" value="@Model.InfoTurnero.IdTurnero" hidden />
                             <input class="text-center" type="text" id="qrdata" name="qrData" hidden />
-                        </form>
+                        </form> 
                         <form asp-action="SaltarTurno">
                             <input type="text" name="idTurnero" value="@Model.InfoTurnero.IdTurnero" hidden />
                             <button class="btn btn-danger" type="submit">Saltar</button>
@@ -43,4 +41,4 @@
     </div>
 </main>
 
-<script src="@Url.Content("~/Scripts/product.validation.js")" type="text/javascript"></script>
+@*<script src="@Url.Content("~/Scripts/product.validation.js")" type="text/javascript"></script>*@

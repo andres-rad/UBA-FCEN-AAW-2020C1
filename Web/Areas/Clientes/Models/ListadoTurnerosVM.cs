@@ -1,9 +1,6 @@
 ﻿using Aplicacion.UseCases.Cliente;
 using Dominio;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Web.Areas.Clientes.Models
 {
@@ -19,6 +16,7 @@ namespace Web.Areas.Clientes.Models
         public int CantidadEnEspera { get; set; }
         public LatLon Ubicacion { get; set; }
         public string DisplayEspera { get; set; }
+        public List<string> Files { get; set; }
 
         public ListarTurnerosVM(ListarTurneroMapaDTO turnero)
         {
@@ -28,6 +26,7 @@ namespace Web.Areas.Clientes.Models
             Calle = turnero.Calle;
             Numero = turnero.Numero;
             Ubicacion = turnero.Ubicacion;
+            Files = turnero.Files;
 
             if(turnero.CantidadMaxima == int.MaxValue)
             {

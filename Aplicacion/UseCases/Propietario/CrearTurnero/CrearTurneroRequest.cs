@@ -1,4 +1,7 @@
-﻿using Dominio;
+﻿using Domain;
+using Dominio;
+using System;
+using System.Collections.Generic;
 
 namespace Aplicacion.UseCases.Propietario
 {
@@ -11,5 +14,6 @@ namespace Aplicacion.UseCases.Propietario
         public int Numero { get; set; }
         public string Concepto { get; set; }
         public int CantidadMaxima { get; set; }
+        public List<FilePath> Files { get; set; }
     }
 }

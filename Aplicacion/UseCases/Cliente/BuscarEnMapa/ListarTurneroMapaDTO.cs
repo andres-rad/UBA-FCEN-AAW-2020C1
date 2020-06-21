@@ -16,5 +16,6 @@ namespace Aplicacion.UseCases.Cliente
         public LatLon Ubicacion { get;  set; }
         public int CantidadMaxima { get; set; }
         public int CantidadEnEspera { get; set; }
+        public List<String> Files { get; set; }
     }
 }

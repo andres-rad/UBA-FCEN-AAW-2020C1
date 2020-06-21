@@ -32,6 +32,9 @@
                 Limite: <span class="badge badge-warning">@(Model.CantidadMaxima == int.MaxValue ? "Sin límite" : Model.CantidadMaxima.ToString())</span>
             </div>
         </div>
+        <div class="col-12">
+            <img width:"400" height="300" src="../../img/@(Model.Files.Count>0 ? Model.Files[0] : "#")"/>
+        </div>
         <hr class="w-100" />
         <div class="col-8 offset-2">
             <div class="row">

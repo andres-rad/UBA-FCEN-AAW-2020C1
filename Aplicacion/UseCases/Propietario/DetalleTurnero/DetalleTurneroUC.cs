@@ -21,7 +21,7 @@ namespace Aplicacion.UseCases.Propietario
 
         public DetalleTurneroResponse Procesar(DetalleTurneroRequest req)
         {
-            var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == req.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).Include(t => t.Files).FirstOrDefault(t => t.Id == req.IdTurnero);
 
             if(turnero == null)
             {
@@ -43,7 +43,8 @@ namespace Aplicacion.UseCases.Propietario
                 QrTurnero = _qrProvider.Encode(turnero.Id.ToString()),
                 CantidadMaxima = turnero.CantidadMaxima,
                 Latitud = turnero.Ubicacion.Latitud,
-                Longitud = turnero.Ubicacion.Longitud
+                Longitud = turnero.Ubicacion.Longitud,
+                Files = turnero.Files
             };
         }
     }

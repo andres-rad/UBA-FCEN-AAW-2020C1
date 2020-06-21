@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using QRCoder;
 using System;
+using System.IO;
 
 namespace Domain
 {
@@ -17,14 +18,17 @@ namespace Domain
 
         public int UltimoNumero { get; internal set; }
 
+        public List<FilePath> Files { get; internal set; }
+
         private List<Turno> _turnos = new List<Turno>();
         
         public List<Turno> Turnos { get { _turnos.Sort((p, q) => p.Numero.CompareTo(q.Numero)); return _turnos; } set { _turnos = value; } }
 
         private Turnero() {
+
         }
 
-        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaxima)
+        public Turnero(string idPropietario, string concepto, LatLon ubicacion, Direccion direccion, int cantidaMaxima, List<FilePath> filePaths)
         {
             IdPropietario = idPropietario;
             Concepto = concepto;
@@ -32,6 +36,7 @@ namespace Domain
             Ubicacion = ubicacion;
             CantidadMaxima = cantidaMaxima;
             UltimoNumero = 0;
+            Files = filePaths;
         }
 
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)

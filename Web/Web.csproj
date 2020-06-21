@@ -36,4 +36,10 @@
     <None Include="Areas\Propietarios\Views\Home\index.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="wwwroot\img\imgonline-com-ua-ColorPalette-lMSZS94b7d48TF.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

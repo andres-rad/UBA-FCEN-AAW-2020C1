@@ -3,6 +3,7 @@ using Domain;
 using Dominio;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Xml;
 
@@ -33,7 +34,8 @@ namespace Aplicacion.UseCases.Propietario
                  req.Concepto,
                  req.Ubicacion,
                  direccion,
-                 req.CantidadMaxima == 0 ? int.MaxValue : req.CantidadMaxima
+                 req.CantidadMaxima == 0 ? int.MaxValue : req.CantidadMaxima,
+                 req.Files
              );
 
             _repository.Turneros.Add(turnero);

@@ -20,5 +20,6 @@ namespace Aplicacion.UseCases.Propietario
         public int CantidadMaxima { get; set; }
         public double Latitud { get; set; }
         public double Longitud { get; set; }
+        public List<FilePath> Files { get; set; }
     }
 }

@@ -17,6 +17,7 @@
             <div class="h4 text-center" id="descripcionTurnero"></div>
             <div class="h6 text-center" id="direccionTurnero"></div>
             <div class="h6 text-center" id="esperaTurnero"></div>
+            <img width:"50" height="150" id="imgTurnero"/>
             <a href="#" id="confirmarTurneroLink" class="btn btn-primary btn-block mt-auto" role="button">Pedir turno</a>
         </div>
         <div id="buscarTurneroDataPanelPlaceholder" class="jumbotron" style="height: 50vh; margin: 1px">
@@ -89,7 +90,7 @@
 
 
 
-    function cargar(id, concepto, direccion, lat, lon, displayEspera) {
+        function cargar(id, concepto, direccion, lat, lon, displayEspera, path) {
         var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
 
         var marker = new OpenLayers.Marker(position);
@@ -101,6 +102,13 @@
             $("#descripcionTurnero").text(concepto);
             $("#direccionTurnero").text(direccion);
             $("#esperaTurnero").text(`Gente en espera: ${displayEspera}`);
+            if (path)
+            {
+                $("#imgTurnero").show();
+                $("#imgTurnero")[0].src = "../../img/" + path;
+            }
+            else
+                $("#imgTurnero").hide();
             $("#idTurnero").val(id);
 
 
@@ -114,7 +122,12 @@
 
     for (var turnero of turneros) {
         var direccion = `${turnero.Calle} ${turnero.Numero} ${turnero.Ciudad}`;
-        cargar(turnero.Id, turnero.Concepto, direccion, turnero.Ubicacion.Latitud, turnero.Ubicacion.Longitud, turnero.DisplayEspera);
+        var path;
+        if (turnero.Files && turnero.Files.length > 0)
+            path = turnero.Files[0];
+        else
+            path = null;
+        cargar(turnero.Id, turnero.Concepto, direccion, turnero.Ubicacion.Latitud, turnero.Ubicacion.Longitud, turnero.DisplayEspera, path);
     }
 </script>
 @*@foreach (var turnero in Model)
