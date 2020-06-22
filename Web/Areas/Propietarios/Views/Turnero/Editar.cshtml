@@ -100,8 +100,6 @@
 
     <script src="https://openlayers.org/api/OpenLayers.js"></script>
     <script>
-        /////////////////////////////////////////////////////////
-        // FACTORIZAR
         var zoom = 12;
         var latIni = -34.6302673;
         var lonIni = -58.4356537;
@@ -132,13 +130,13 @@
         });
         map.setCenter(positionIni, zoom);
 
+        cargar(parseFloat('@(@Model.Latitud)'.replace(',', '.')), parseFloat('@(@Model.Longitud)'.replace(',', '.')));
 
         map.events.register('click', map, handleClick);
         map.events.register('touchstart', map, handleClick);
 
         function handleClick(e) {
             var lonlat = map.getLonLatFromViewPortPx(e.xy);
-            addMarker(lonlat);
             lonlat = new OpenLayers.LonLat(lonlat.lon, lonlat.lat).transform(toProjection, fromProjection);
             $("#inputLatitud").val(lonlat.lat);
             $("#inputLongitud").val(lonlat.lon);
@@ -149,10 +147,15 @@
         var icon = new OpenLayers.Icon('https://www.flaticon.com/premium-icon/icons/svg/2776/2776000.svg', size, offset);
 
 
-        function addMarker(position) {
-            var markers = map.layers[1]
-            markers.clearMarkers();
-            markers.addMarker(new OpenLayers.Marker(position, icon));
+        function cargar(lat, lon) {
+            var markers = new OpenLayers.Layer.Markers("Markers");
+
+            var position = new OpenLayers.LonLat(lon, lat).transform(fromProjection, toProjection);
+
+            var marker = new OpenLayers.Marker(position);
+            markers.addMarker(marker);
+            map.addLayer(markers);
+
         }
     </script>
 </form>
