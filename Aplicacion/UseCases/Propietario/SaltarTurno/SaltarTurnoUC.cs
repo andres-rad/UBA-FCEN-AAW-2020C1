@@ -1,4 +1,5 @@
-﻿using Aplicacion.Interfaces;
+﻿using Aplicacion.Exceptions;
+using Aplicacion.Interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -25,7 +26,7 @@ namespace Aplicacion.UseCases.Propietario
 
             if(turnero == null)
             {
-                throw new Exception("Turnero no encontrado");
+                throw new TurneroNotFoundException("Turnero no encontrado");
             }
 
             var turnoEnLlamada = turnero.LlamarSiguiente();

@@ -16,8 +16,6 @@ using Aplicacion.Interfaces;
 using Infrastructura;
 using Infrastructura.Identity;
 using Infrastructure.Persistance;
-using Aplicacion.UseCases.Cliente;
-using Aplicacion.UseCases.Propietario;
 using System.Reflection;
 
 namespace Web
@@ -78,7 +76,7 @@ namespace Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // The default HSTS value is 30 days.You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
@@ -100,6 +98,10 @@ namespace Web
                     name: "AreaPropietarios",
                     areaName: "Propietarios",
                     pattern: "Propietarios/{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "errorHandling",
+                    pattern: "Home/Error/{id?}",
+                    defaults: new {  controller = "Home", action = "Error" });
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}",

@@ -1,3 +1,4 @@
+using Aplicacion.Exceptions;
 using Aplicacion.Interfaces;
 using Domain;
 using Dominio;
@@ -19,6 +20,8 @@ namespace Aplicacion.UseCases.Propietario
         public EditarTurneroResponse Procesar(EditarTurneroRequest req)
         {
             var turnero = _repository.Turneros.Find(req.IdTurnero);
+
+            if(turnero == null) throw new TurneroNotFoundException("Turnero no encontrado");
 
             var direccion = new Direccion()
             {
