@@ -39,8 +39,8 @@ namespace Web
             services.AddScoped<IRepository, ApplicationDbContext>();
 
             // USAR CurrentUserService PARA PROBAR CON UN USUARIO LOGUEADO
-            // services.AddScoped<ICurrentUserService, CurrentUserService>();
-            services.AddScoped<ICurrentUserService, SeedCurrentUserService>();
+             services.AddScoped<ICurrentUserService, CurrentUserService>();
+            //services.AddScoped<ICurrentUserService, SeedCurrentUserService>();
             
             services.AddHttpContextAccessor();
             //FIN de Servicios utilizados por la Aplicacion provistos por Infrastructura
@@ -57,7 +57,14 @@ namespace Web
                 options.UseInMemoryDatabase(Configuration.GetConnectionString("InMemoryDB")));
             //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<IdentityUser>(options => {
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric =false;
+                options.Password.RequireUppercase = false;
+            })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddControllersWithViews();
