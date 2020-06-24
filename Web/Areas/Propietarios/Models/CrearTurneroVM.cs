@@ -21,7 +21,7 @@ namespace Web.Areas.Propietarios.Models
         
         [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public int Numero { get; set; }
-        
+
         public int CantidadMaxima { get; set; }
 
         [Required(ErrorMessage = "{0} no puede estar vacio.")]
@@ -30,7 +30,7 @@ namespace Web.Areas.Propietarios.Models
         [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Longitud { get; set; }
 
-        public IFormFile[] files { get; set; }
+        public IFormFile[] Files { get; set; }
 
         public CrearTurneroVM() { }
         public CrearTurneroVM(string concepto, string ciudad, string calle, int numero, IFormFile[] archivos, int cantidad=9)
@@ -40,7 +40,7 @@ namespace Web.Areas.Propietarios.Models
             Calle = calle;
             Numero = numero;
             CantidadMaxima = cantidad;
-            files=archivos;
+            Files=archivos;
         }
     }
 }

@@ -46,7 +46,7 @@ namespace Web.Areas.Propietarios.Controllers
                 return View();
             }
 
-            List<FilePath> filePaths = Common.Utils.PersistFiles(turnero.files, AppDomain.CurrentDomain.BaseDirectory);
+            List<FilePath> filePaths = Common.Utils.PersistFiles(turnero.Files, AppDomain.CurrentDomain.BaseDirectory);
 
             var req = new CrearTurneroRequest
             {
