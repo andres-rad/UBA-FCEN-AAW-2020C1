@@ -18,7 +18,8 @@ namespace Domain
 
         public int UltimoNumero { get; internal set; }
 
-        public List<FilePath> Files { get; internal set; }
+        private List<FilePath> _files = new List<FilePath>();
+        public List<FilePath> Files { get => _files; internal set => _files = value; }
 
         private List<Turno> _turnos = new List<Turno>();
         
