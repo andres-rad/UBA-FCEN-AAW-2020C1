@@ -7,9 +7,7 @@ namespace Aplicacion.Exceptions
 {
     public class TurneroNotFoundException : Exception
     {
-        public TurneroNotFoundException(string message): base(message)
-        {
-            
-        }
+        public TurneroNotFoundException(): base(){}
+        public TurneroNotFoundException(string message): base(message) { }
     }
 }

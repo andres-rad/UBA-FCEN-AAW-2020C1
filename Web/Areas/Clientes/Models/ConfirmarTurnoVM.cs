@@ -13,7 +13,7 @@ namespace Web.Areas.Clientes.Models
         public int Numero { get; set; }
         public string MensajePersonasFila { get; set; }
         public bool FilaLlena { get; set; }
-        public ConfirmarTurnoVM(DetalleTurneroClienteResponse response)
+        public ConfirmarTurnoVM(DetallarTurneroClienteResponse response)
         {
             IdTurnero = response.Id;
             Latitud = response.Latitud;

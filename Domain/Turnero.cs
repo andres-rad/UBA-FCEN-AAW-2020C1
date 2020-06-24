@@ -36,7 +36,7 @@ namespace Domain
             Ubicacion = ubicacion;
             CantidadMaxima = cantidaMaxima;
             UltimoNumero = 0;
-            Files = filePaths;
+            Files = filePaths ?? new List<FilePath>();
         }
 
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)

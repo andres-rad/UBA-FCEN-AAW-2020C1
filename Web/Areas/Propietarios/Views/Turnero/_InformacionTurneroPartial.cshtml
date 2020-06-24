@@ -33,7 +33,10 @@
             </div>
         </div>
         <div class="col-12" >
-            <img class="rounded mx-auto d-block" style=" height: 250px ;width:250px; max-width: 250px;max-height: 250px;min-width: 250px;min-height: 250px;"   src="../../img/@(Model.Files.Count>0 ? Model.Files[0] : "#")"/>
+            @if(Model.Files.Count > 0) { 
+            <img class="rounded mx-auto d-block" style=" height: 250px ;width:250px; max-width: 250px;max-height: 250px;min-width: 250px;min-height: 250px;"
+                 src="../../img/@Model.Files[0]"/>
+            }
         </div>
         <hr class="w-100" />
         <div class="col-8 offset-2">

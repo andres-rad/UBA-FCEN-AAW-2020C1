@@ -1,4 +1,5 @@
-﻿using Aplicacion.Interfaces;
+﻿using Aplicacion.Exceptions;
+using Aplicacion.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,34 +8,34 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Cliente
 {
-    public class DetalleTurnoUC : IUseCase
+    public class DetallarTurnoUC : IUseCase
     {
         private readonly IRepository _repository;
         private readonly IQRProvider _qrProvider;
 
-        public DetalleTurnoUC(IRepository repository, IQRProvider qrProvider)
+        public DetallarTurnoUC(IRepository repository, IQRProvider qrProvider)
         {
             _repository = repository;
             _qrProvider = qrProvider;
         }
 
-        public DetalleTurnoResponse Procesar(DetalleTurnoRequest request)
+        public DetallarTurnoResponse Procesar(DetallarTurnoRequest request)
         {
             var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if(turnero == null)
             {
-                throw new Exception("Turnero inexistente");
+                throw new TurneroNotFoundException($"{request.IdTurnero}");
             }
 
             var turno = turnero.Turno(request.IdTurno);
 
             if (turno == null)
             {
-                throw new Exception("Turno inexistente");
+                throw new TurnoNotFoundException($"{request.IdTurno}");
             }
 
-            return new DetalleTurnoResponse() { 
+            return new DetallarTurnoResponse() { 
                 IdTurnero = turnero.Id,
                 IdTurno = turno.Id,
                 NumeroTurno = turno.Numero,

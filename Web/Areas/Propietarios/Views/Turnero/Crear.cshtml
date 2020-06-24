@@ -16,6 +16,7 @@
                placeholder="Descripción del servicio"
                name="concepto"
                asp-for="Concepto">
+        <span asp-validation-for="Concepto" class="text-danger"></span>
     </div>
     <h4> Dirección </h4>
     <hr />
@@ -27,6 +28,7 @@
                    id="inputCiudad"
                    name="ciudad"
                    asp-for="Ciudad" />
+            <span asp-validation-for="Ciudad" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
             <label for="inputCalle">Calle</label>
@@ -35,6 +37,7 @@
                    class="form-control"
                    name="calle"
                    asp-for="Calle" />
+            <span asp-validation-for="Calle" class="text-danger"></span>
         </div>
         <div class="form-group col-md-2">
             <label for="inputNumero">Altura</label>
@@ -44,6 +47,7 @@
                    min="1"
                    name="numero"
                    asp-for="Numero">
+            <span asp-validation-for="Numero" class="text-danger"></span>
         </div>
     </div>
     <div id="buscarTurneroMap" style="height:50vh"></div>
@@ -57,6 +61,7 @@
                    name="latitud"
                    asp-for="Latitud"
                    required>
+            <span asp-validation-for="Latitud" class="text-danger"></span>
         </div>
         <div class="form-group col-md-4">
             <input type="text"
@@ -67,6 +72,7 @@
                    name="longitud"
                    asp-for="Longitud"
                    required>
+            <span asp-validation-for="Longitud" class="text-danger"></span>
         </div>
     </div>
     <div class="form-group">
@@ -78,6 +84,8 @@
                placeholder="Tamaño de la cola"
                name="CantidadMaxima"
                asp-for="CantidadMaxima" />
+        <span asp-validation-for="CantidadMaxima" class="text-danger"></span>
+
     </div>
     <div class="form-group">
 

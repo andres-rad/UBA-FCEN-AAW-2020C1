@@ -1,6 +1,6 @@
 ﻿namespace Aplicacion.UseCases.Cliente
 {
-    public class DetalleTurnoResponse
+    public class DetallarTurnoResponse
     {
         public int IdTurnero { get; set; }
         public string Concepto { get; set; }

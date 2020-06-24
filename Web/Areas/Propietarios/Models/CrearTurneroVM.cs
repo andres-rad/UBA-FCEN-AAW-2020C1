@@ -10,13 +10,24 @@ namespace Web.Areas.Propietarios.Models
 {
     public class CrearTurneroVM
     {
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Concepto { get; set; }
+        
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Ciudad{ get; set; }
+        
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Calle { get; set; }
+        
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public int Numero { get; set; }
+        
         public int CantidadMaxima { get; set; }
 
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Latitud { get; set; }
+        
+        [Required(ErrorMessage = "{0} no puede estar vacio.")]
         public string Longitud { get; set; }
 
         public IFormFile[] files { get; set; }

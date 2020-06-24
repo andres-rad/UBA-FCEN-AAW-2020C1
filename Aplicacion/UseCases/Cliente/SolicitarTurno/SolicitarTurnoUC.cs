@@ -1,4 +1,5 @@
-﻿using Aplicacion.Interfaces;
+﻿using Aplicacion.Exceptions;
+using Aplicacion.Interfaces;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,7 +27,7 @@ namespace Aplicacion.UseCases.Cliente
 
             if(turnero == null)
             {
-                throw new Exception("Turnero no existente");
+                throw new TurneroNotFoundException();
             }
 
             var turno = turnero.ExpedirTurno(request.Email);

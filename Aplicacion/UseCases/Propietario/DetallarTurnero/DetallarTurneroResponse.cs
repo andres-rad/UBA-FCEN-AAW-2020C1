@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class DetalleTurneroResponse
+    public class DetallarTurneroResponse
     {
         public int IdTurnero { get; set; }
         public string IdPropietario { get; set; }

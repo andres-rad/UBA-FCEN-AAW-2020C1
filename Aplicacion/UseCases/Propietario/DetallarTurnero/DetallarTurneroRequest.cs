@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Aplicacion.UseCases.Propietario
 {
-    public class DetalleTurneroRequest
+    public class DetallarTurneroRequest
     {
         public int IdTurnero { get; set; }
     }

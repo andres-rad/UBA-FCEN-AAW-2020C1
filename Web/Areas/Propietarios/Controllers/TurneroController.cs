@@ -33,12 +33,19 @@ namespace Web.Areas.Propietarios.Controllers
         [HttpGet]
         public IActionResult Crear()
         {
-            return View();
+            var model = new CrearTurneroVM();
+            model.CantidadMaxima = 10;
+            return View(model);
         }
 
         [HttpPost]
         public IActionResult Crear(CrearTurneroVM turnero, [FromServices] CrearTurneroUC uc)
         {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+
             List<FilePath> filePaths = Common.Utils.PersistFiles(turnero.files, AppDomain.CurrentDomain.BaseDirectory);
 
             var req = new CrearTurneroRequest
@@ -48,7 +55,7 @@ namespace Web.Areas.Propietarios.Controllers
                 Calle = turnero.Calle,
                 Numero = turnero.Numero,
                 Concepto = turnero.Concepto,
-                Ubicacion = new LatLon(double.Parse(turnero.Latitud), double.Parse(turnero.Longitud)),
+                Ubicacion = new LatLon(double.Parse(turnero.Latitud.Replace('.',',')), double.Parse(turnero.Longitud.Replace('.', ','))),
                 CantidadMaxima = turnero.CantidadMaxima,
                 Files = filePaths
             };
@@ -67,9 +74,9 @@ namespace Web.Areas.Propietarios.Controllers
         }
 
         [HttpGet]
-        public IActionResult Detalle(int idTurnero, [FromServices] DetalleTurneroUC uc)
+        public IActionResult Detalle(int idTurnero, [FromServices] DetallarTurneroUC uc)
         {
-            var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
+            var req = new DetallarTurneroRequest { IdTurnero = idTurnero };
             var response = uc.Procesar(req);
 
             List<String> filespaths = new List<string>();
@@ -136,9 +143,9 @@ namespace Web.Areas.Propietarios.Controllers
         }
 
         [HttpGet]
-        public IActionResult Editar(int idTurnero, [FromServices] DetalleTurneroUC uc)
+        public IActionResult Editar(int idTurnero, [FromServices] DetallarTurneroUC uc)
         {
-            var req = new DetalleTurneroRequest { IdTurnero = idTurnero };
+            var req = new DetallarTurneroRequest { IdTurnero = idTurnero };
             var detalleTurnero = uc.Procesar(req);
             //TODO: quitar constructor y usar instanciacion por propiedades new Xxxx { ... }
             var turnero = new EditarTurneroVM(
@@ -194,7 +201,8 @@ namespace Web.Areas.Propietarios.Controllers
                     Qr = response.QrTurnero,
                     CantidadMaxima = response.CantidadMaxima,
                     Latitud = response.Latitud,
-                    Longitud = response.Longitud
+                    Longitud = response.Longitud,
+                    Files = response.Files
                 },
                 NumeroEnLlamada = response.NumeroTurnoEnLlamada,
                 NumeroLeidoEnQr = response.NumeroTurnoEnQr
