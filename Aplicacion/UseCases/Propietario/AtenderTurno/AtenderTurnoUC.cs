@@ -31,7 +31,7 @@ namespace Aplicacion.UseCases.Propietario
                 throw new Exception("Qr invalido");
             }
 
-            var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).Include(t => t.Files).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if (turnero == null)
             {
@@ -46,7 +46,9 @@ namespace Aplicacion.UseCases.Propietario
             }
 
             var turnoEnLlamada = turnero.TurnoEnLlamada();
-
+            
+            List<string> files = new List<string>(); 
+            if(turnero.Files!=null &&turnero.Files.Count()>0) { files.Add(turnero.Files[0].Path); }
             return new AtenderTurnoResponse
             {
                 IdTurnero = turnero.Id,
@@ -61,7 +63,8 @@ namespace Aplicacion.UseCases.Propietario
                 CantidadMaxima = turnero.CantidadMaxima,
                 Latitud = turnero.Ubicacion.Latitud,
                 Longitud = turnero.Ubicacion.Longitud,
-                NumeroTurnoEnQr = turnoEnQr.Numero
+                NumeroTurnoEnQr = turnoEnQr.Numero,
+                Files = files
             };
         }
     }

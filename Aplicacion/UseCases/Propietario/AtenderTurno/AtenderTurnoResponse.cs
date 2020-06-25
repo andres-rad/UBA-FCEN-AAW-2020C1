@@ -16,5 +16,7 @@
         public double Latitud { get; set; }
         public double Longitud { get; set; }
 
+        public System.Collections.Generic.List<string> Files { get; set; }
+
     }
 }

@@ -194,7 +194,8 @@ namespace Web.Areas.Propietarios.Controllers
                     Qr = response.QrTurnero,
                     CantidadMaxima = response.CantidadMaxima,
                     Latitud = response.Latitud,
-                    Longitud = response.Longitud
+                    Longitud = response.Longitud,
+                    Files = response.Files
                 },
                 NumeroEnLlamada = response.NumeroTurnoEnLlamada,
                 NumeroLeidoEnQr = response.NumeroTurnoEnQr
