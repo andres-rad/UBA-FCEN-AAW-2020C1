@@ -32,7 +32,7 @@ namespace Aplicacion.UseCases.Propietario
                 throw new InvalidQrException("No contiene datos en el formato correcto");
             }
 
-            var turnero = _repository.Turneros.Include(t => t.Turnos).FirstOrDefault(t => t.Id == request.IdTurnero);
+            var turnero = _repository.Turneros.Include(t => t.Turnos).Include(t => t.Files).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if (turnero == null)
             {
@@ -47,6 +47,7 @@ namespace Aplicacion.UseCases.Propietario
             }
 
             var turnoEnLlamada = turnero.TurnoEnLlamada();
+            
 
             return new AtenderTurnoResponse
             {
@@ -64,6 +65,7 @@ namespace Aplicacion.UseCases.Propietario
                 Longitud = turnero.Ubicacion.Longitud,
                 NumeroTurnoEnQr = turnoEnQr.Numero,
                 Files = turnero.Files.Select(f => f.Path).ToList()
+
             };
         }
     }

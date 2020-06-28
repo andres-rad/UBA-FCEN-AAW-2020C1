@@ -10,18 +10,18 @@ namespace Infrastructura.Persistance
     {
         public static void Load(ApplicationDbContext context)
         {
-            FilePath p1 = new FilePath(0, "Walmart.jpg");
+            FilePath p1 = new FilePath(0, "Carrefour.png");
             FilePath p2 = new FilePath(0, "Coto.png");
             FilePath p3 = new FilePath(0, "Disco.jpg");
             FilePath p4 = new FilePath(0, "Dia.jpg");
 
             var turneros = new Turnero[] { new Turnero(
                     idPropietario: "seedUser",
-                  concepto: "Coto",
+                  concepto: "Carrefour",
                   ubicacion: new Dominio.LatLon ( lat: -34.61066273180164, lon: -58.41436768925822 ),
-                  direccion: new Dominio.Direccion { Calle = "CalleAzul", Ciudad = "CABA", Numero = 122 },
+                  direccion: new Dominio.Direccion { Calle = "Uriarte", Ciudad = "CABA", Numero = 812 },
                   cantidaMaxima: 100,
-                  new List<FilePath> { p2 }
+                  new List<FilePath> { p1 }
                   ),
 
 
@@ -54,11 +54,11 @@ namespace Infrastructura.Persistance
 
                 new Turnero(
                     idPropietario: "seedUser",
-                  concepto: "Dia",
+                  concepto: "Disco",
                   ubicacion: new Dominio.LatLon ( lat: -34.611510422952264, lon: -58.454536451464705 ),
-                  direccion: new Dominio.Direccion { Calle = "CalleSinNombre", Ciudad = "CABA", Numero = 0 },
+                  direccion: new Dominio.Direccion { Calle = "La Rioja", Ciudad = "CABA", Numero = 210 },
                   cantidaMaxima: 2,
-                  new List<FilePath> { p4 }
+                  new List<FilePath> { p3 }
                   )
             };
 
