@@ -1,4 +1,5 @@
-﻿using Aplicacion.Interfaces;
+﻿using Aplicacion.Exceptions;
+using Aplicacion.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -28,27 +29,26 @@ namespace Aplicacion.UseCases.Propietario
             }
             catch
             {
-                throw new Exception("Qr invalido");
+                throw new InvalidQrException("No contiene datos en el formato correcto");
             }
 
             var turnero = _repository.Turneros.Include(t => t.Turnos).Include(t => t.Files).FirstOrDefault(t => t.Id == request.IdTurnero);
 
             if (turnero == null)
             {
-                throw new Exception("Turnero inexistente");
+                throw new TurneroNotFoundException();
             }
 
             var turnoEnQr = turnero.Turno(idturnoEnQr);
 
             if(turnoEnQr == null) 
             {
-                throw new Exception("Qr invalido: no contiene data de un turnero");
+                throw new InvalidQrException("No contiene data de un turno");
             }
 
             var turnoEnLlamada = turnero.TurnoEnLlamada();
             
-            List<string> files = new List<string>(); 
-            if(turnero.Files!=null &&turnero.Files.Count()>0) { files.Add(turnero.Files[0].Path); }
+
             return new AtenderTurnoResponse
             {
                 IdTurnero = turnero.Id,
@@ -64,7 +64,8 @@ namespace Aplicacion.UseCases.Propietario
                 Latitud = turnero.Ubicacion.Latitud,
                 Longitud = turnero.Ubicacion.Longitud,
                 NumeroTurnoEnQr = turnoEnQr.Numero,
-                Files = files
+                Files = turnero.Files.Select(f => f.Path).ToList()
+
             };
         }
     }

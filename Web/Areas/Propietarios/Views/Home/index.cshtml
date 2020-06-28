@@ -6,10 +6,14 @@
 
 <main>
     <div class="row">
-        <h1>
-            Mis Turneros
-        </h1>
-        <div class="col-12" style="margin-top: 10px">
+        <div style=" display: flex; align-items: center; justify-content: space-between; width: 100%;">
+            <h1>
+                Mis Turneros
+
+            </h1>
+            <a role="button" class="btn btn-primary" asp-area="Propietarios" asp-controller="Turnero" asp-action="Crear">Nuevo Turnero</a>
+        </div>
+        <div class="col-12 text-center" style="margin-top: 10px; width: 100%">
             @if (@Model.Count == 0)
             {
                 <div class="jumbotron">
@@ -18,7 +22,7 @@
             }
             else
             {
-                <table class="table table-responsive table-striped " style="width:100%">
+                <table class="table  " style="margin-left: auto;margin-right: auto ; ">
                     <thead>
                         <tr>
                             <th scope="col">Nombre</th>
@@ -31,20 +35,24 @@
                         @foreach (var turnero in Model)
                         {
                             <tr>
-                                <td> @turnero.Concepto </td>
-                                <td> @turnero.Calle @turnero.Numero, @turnero.Ciudad</td>
-                                <td class="text-center"> @turnero.CantidadEnEspera</td>
-                                <td>
+                                <td class="align-middle">
                                     @Html.ActionLink(
-                                        "Detalle",
+                                        @turnero.Concepto,
                                         "Detalle",
                                         "Turnero",
                                         new
-                                             {
+                                        {
                                             idTurnero = turnero.Id
                                         },
-                                        null
+                                        new { role = "button", @class = "btn btn-light", style = "min-width:80%;font-size: x-large" }
+
                                     )
+
+                                </td>
+                                <td class="align-middle"> @turnero.Calle @turnero.Numero, @turnero.Ciudad</td>
+                                <td class="align-middle text-center"> @turnero.CantidadEnEspera</td>
+                                <td class="align-middle">
+
                                     @Html.ActionLink(
                                         "Editar",
                                         "Editar",
@@ -63,9 +71,4 @@
             }
         </div>
     </div>
-    <footer>
-        <div class="text-center justify-content-center">
-            <a role="button" class="btn btn-primary" asp-area="Propietarios" asp-controller="Turnero" asp-action="Crear">Nuevo Turnero</a>
-        </div>
-    </footer>
 </main>

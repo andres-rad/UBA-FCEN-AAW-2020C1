@@ -30,10 +30,10 @@ namespace Web.Areas.Clientes.Controllers
 
 
         [HttpGet]
-        public IActionResult Detalle(int idTurnero, int idTurno, [FromServices] DetalleTurnoUC detalleTurnoUC)
+        public IActionResult Detalle(int idTurnero, int idTurno, [FromServices] DetallarTurnoUC detalleTurnoUC)
         {
 
-            var request = new DetalleTurnoRequest
+            var request = new DetallarTurnoRequest
             {
                 IdTurnero = idTurnero,
                 IdTurno = idTurno

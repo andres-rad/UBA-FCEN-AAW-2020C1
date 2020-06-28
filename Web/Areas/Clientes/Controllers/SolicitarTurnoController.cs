@@ -41,9 +41,9 @@ namespace Web.Areas.Clientes.Controllers
         }
 
         [HttpGet]
-        public IActionResult ConfirmarTurno(int idTurnero, [FromServices] DetalleTurneroClienteUC uc)
+        public IActionResult ConfirmarTurno(int idTurnero, [FromServices] DetallarTurneroClienteUC uc)
         {
-            var req = new DetalleTurneroClienteRequest { IdTurnero = idTurnero };
+            var req = new DetallarTurneroClienteRequest { IdTurnero = idTurnero };
             var turneroData = uc.Procesar(req);
             return View(new ConfirmarTurnoVM(turneroData));
         }

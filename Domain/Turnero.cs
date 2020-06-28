@@ -19,11 +19,17 @@ namespace Domain
         public int UltimoNumero { get; internal set; }
 
         private List<FilePath> _files = new List<FilePath>();
-        public List<FilePath> Files { get => _files; internal set => _files = value; }
+        public List<FilePath> Files { 
+            get => _files; 
+            internal set => _files = value;
+        } 
 
         private List<Turno> _turnos = new List<Turno>();
         
-        public List<Turno> Turnos { get { _turnos.Sort((p, q) => p.Numero.CompareTo(q.Numero)); return _turnos; } set { _turnos = value; } }
+        public List<Turno> Turnos {
+            get => _turnos; 
+            internal set { _turnos = value; _turnos.Sort((p, q) => p.Numero.CompareTo(q.Numero)); }
+        }
 
         private Turnero() {
 
@@ -37,7 +43,7 @@ namespace Domain
             Ubicacion = ubicacion;
             CantidadMaxima = cantidaMaxima;
             UltimoNumero = 0;
-            Files = filePaths;
+            Files = filePaths ?? new List<FilePath>();
         }
 
         public void Actualizar(string concepto, LatLon ubicacion, Direccion direccion, int cantidad)
@@ -96,7 +102,7 @@ namespace Domain
 
         public Turno TurnoEnLlamada()
         {
-            return Turnos.OrderBy(t => t.Orden).FirstOrDefault();
+            return Turnos.FirstOrDefault();
         }
 
         public int CantidadEnEspera()
